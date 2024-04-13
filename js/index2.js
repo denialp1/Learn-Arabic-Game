@@ -1,9 +1,9 @@
 import { canvas, c } from './canvas.js'
 import { collisionsMap, Boundary, boundaries, collision } from './boundary.js'
-import { image, playerUpImage, playerLeftImage, playerRightImage, playerDownImage } from './assets.js'
 import { Sprite, player, background } from './sprites.js'
 import { keys, lastKey } from './movement.js'
-import { puzzles } from './puzzles.js'
+import { puzzles, enterPuzzle } from './puzzles.js'
+import { setButtons, inPuzzle, getInPuzzle, setInPuzzle } from './puzzles.js'
 
 // spread operator ... all boundary objects into movable
 const moveables = [background, ...boundaries, ...puzzles]
@@ -18,19 +18,20 @@ function animate() {
     puzzles.forEach(boundary => {
         boundary.draw()
     })
-    player.draw();
+    player.draw()
 
-    handlePlayerInput();
+    handlePlayerInput()
 }
 animate(); // continuous run
 
 function handlePlayerInput() {
     const offset = 4 // movement offset
-    player.moving = false;
-    handlePlayerMovement('w', 0, offset); // Move up
-    handlePlayerMovement('a', offset, 0); // Move left
-    handlePlayerMovement('s', 0, -offset); // Move down
-    handlePlayerMovement('d', -offset, 0); // Move right
+    player.moving = false
+    if (getInPuzzle()) return
+    handlePlayerMovement('w', 0, offset) // Move up
+    handlePlayerMovement('a', offset, 0) // Move left
+    handlePlayerMovement('s', 0, -offset) // Move down
+    handlePlayerMovement('d', -offset, 0) // Move right
 
     if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
         checkPuzzle()
@@ -40,12 +41,12 @@ function handlePlayerInput() {
 function handlePlayerMovement(direction, dx, dy) {
     if (keys[direction].pressed && lastKey === direction) {
         player.moving = true;
-        player.image = player.sprites[dmap[direction]];
+        player.image = player.sprites[dmap[direction]]
 
         // check collision with boundaries
         let moving = true;
         for (let i = 0; i < boundaries.length; i++) {
-            const boundary = boundaries[i];
+            const boundary = boundaries[i]
             const adjustedBoundary = {
                 ...boundary,
                 position: {
@@ -56,15 +57,15 @@ function handlePlayerMovement(direction, dx, dy) {
 
             if (collision({ rectangle1: player, rectangle2: adjustedBoundary })) {
                 moving = false;
-                break;
+                break
             }
         }
 
         // no collision, move map
         if (moving) {
             moveables.forEach((moveable) => {
-                moveable.position.x += dx;
-                moveable.position.y += dy;
+                moveable.position.x += dx
+                moveable.position.y += dy
             });
         }
     }
@@ -85,8 +86,12 @@ function checkPuzzle() {
         const puzzle = puzzles[i]
         if (collision({ rectangle1: player, rectangle2: puzzle })) {
             // dont break, interact
-            console.log("interact")
+            setInPuzzle(true)    
+            setButtons();
+            enterPuzzle();
             break;
         }
     }
 }
+
+export {animate }

@@ -1,19 +1,93 @@
 <!DOCTYPE html>
-<head></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Arabic</title>
+</head>
+<body>
+    <div class="canvas-container">
+        <canvas id="myCanvas"></canvas>
+
+        <div class="button-container">
+            <button id="button1" class="custom">Option 1</button>
+            <button id="button2" class="custom">Option 2</button>
+            <button id="button3" class="custom">Option 3</button>
+        </div>
+    </div>
+
+    <script src="js/data/collisions.js"></script>
+    <script src="js/data/interactions.js"></script>
+    <script type="module" src="js/canvas.js"></script>
+    <script type="module" src="js/boundary.js"></script>
+    <script type="module" src="js/assets.js"></script>
+    <script type="module" src="js/sprites.js"></script>
+    <script type="module" src="js/movement.js"></script>
+    <script type="module" src="js/puzzles.js"></script>
+    <script type="module" src="js/index2.js"></script>
+    <!-- <script src="js/index.js"></script> -->
+</body>
+</html>
+
+
 
 <style>
-    body {
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
         background-color: black;
     }
-</style>
 
-<canvas></canvas>
-<script src="js/data/collisions.js"></script>
-<script src="js/data/interactions.js"></script>
-<script type= "module" src = "js/canvas.js"></script>
-<script type= "module" src="js/boundary.js"></script>
-<script type= "module" src="js/assets.js"></script>
-<script type= "module" src = "js/sprites.js"></script>
-<script type= "module" src = "js/movement.js"></script>
-<script type= "module" src="js/index2.js"></script>
-<!-- <script src="js/index.js"></script> -->
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .canvas-container {
+        position: relative;
+        width: 800px;
+        height: 600px;
+    }
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; 
+        height: 100%;
+        z-index: 1;
+    }
+
+    .button-container {
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .custom {
+        opacity: 0;
+        color: black;
+        padding: 20px 182px;
+        margin-bottom: 16px;
+        background-color: #D2B48C;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: medium;
+        cursor: pointer;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .custom:hover {
+            background-color: #B09068;
+        }
+</style>

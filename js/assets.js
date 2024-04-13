@@ -13,10 +13,14 @@ playerRightImage.src = './assets/characters/amelia/right.png'
 const playerDownImage = new Image();
 playerDownImage.src = './assets/characters/amelia/down.png'
 
+const dialogue = new Image();
+dialogue.src = './assets/ui/dialogue.png'
+
 export {
     image,
     playerUpImage,
     playerLeftImage,
     playerRightImage,
-    playerDownImage
+    playerDownImage,
+    dialogue
 };
