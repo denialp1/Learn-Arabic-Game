@@ -1,6 +1,5 @@
 import { canvas, c } from './canvas.js';
 import { image, playerUpImage, playerLeftImage, playerRightImage, playerDownImage, dialogue } from './assets.js'
-import { setButtons } from './puzzles.js'
 
 // class sprite
 class Sprite {
@@ -70,6 +69,5 @@ const background = new Sprite({
     image: image
 })
 
-setButtons();
 
 export { Sprite, player, background };

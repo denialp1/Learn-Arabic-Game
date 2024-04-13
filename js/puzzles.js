@@ -58,7 +58,7 @@ class Puzzle {
 let puzzleAnimationId
 const puzzleUI = new Puzzle({
     position: { // can be changed per map
-        x: 10,
+        x: 0,
         y: 0
     },
     image: dialogue
@@ -74,10 +74,10 @@ function enterPuzzle() {
     }
 
     // gray overlay on top of screen
-    c.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    c.fillStyle = 'rgba(58,58,80, 0.7)';
     c.fillRect(0, 0, canvas.width, canvas.height);
 
-    // load options
+    // load options 
     const button1 = document.getElementById('button1')
     const button2 = document.getElementById('button2')
     const button3 = document.getElementById('button3')
