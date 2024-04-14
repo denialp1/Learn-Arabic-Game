@@ -1,6 +1,6 @@
 import {canvas, c} from './canvas.js'
 import { collisionsMap, Boundary, boundaries, collision } from './boundary.js'
-import { image, playerUpImage, playerLeftImage, playerRightImage, playerDownImage, dialogue } from './assets.js'
+import { dialogue} from './assets.js'
 import { Sprite, player, background } from './sprites.js'
 import { keys, lastKey } from './movement.js'
 // import { animate } from './index2.js'
@@ -9,6 +9,8 @@ import { keys, lastKey } from './movement.js'
 const puzzleMap = []
 const width = 19 // width of the map
 const scale = 2
+const delay = ms => new Promise(res => setTimeout(res, ms)); // delay function temp
+
 let inPuzzle = false
 // iterate through each row of the map to build collision array
 for (let i = 0; i < interactionData.length; i+= width) {
@@ -56,10 +58,12 @@ class Puzzle {
 }
 
 let puzzleAnimationId
+let messageAnimationId
+
 const puzzleUI = new Puzzle({
     position: { // can be changed per map
-        x: 0,
-        y: 0
+        x: player.position.x - dialogue.width/3,
+        y: player.position.y - dialogue.height/4
     },
     image: dialogue
 })
@@ -90,35 +94,72 @@ function enterPuzzle() {
     
 }
 
+function enterMessage() {
+    messageAnimationId = window.requestAnimationFrame(enterMessage)
+
+    // get gray overlay * whole screen!
+    const element = document.getElementById('overlappingDiv')
+    if (element) {
+        // element.style.opacity = 0.8
+    }
+
+    // gray overlay on top of screen
+    c.fillStyle = 'rgba(58,58,80, 0.7)';
+    c.fillRect(0, 0, canvas.width, canvas.height);
+
+    // load options 
+    const dialogueDisplay = document.getElementById('dialogue')
+    dialogueDisplay.style.opacity = 1
+
+    // then draw puzzle ui
+    puzzleUI.draw()
+    
+}
+
 function setButtons() {
     const button1 = document.getElementById('button1')
     const button2 = document.getElementById('button2')
     const button3 = document.getElementById('button3')
+    const dialogueDisplay = document.getElementById('dialogue')
     button1.addEventListener('click', handleButton1Click);
-    button2.addEventListener('click', handleButton1Click);
-    button3.addEventListener('click', handleButton1Click);
+    button2.addEventListener('click', handleButton2Click);
+    button3.addEventListener('click', handleButton2Click);
 }
 
+// success
 function handleButton1Click() {
-    c.clearRect(0, 0, canvas.width, canvas.height)
+    finishPuzzle("Success! You have completed the interaction.")
+    inPuzzle = false
+}
+
+// failure
+function handleButton2Click() {
+    finishPuzzle("Failure! You have not completed the interaction.")
+    inPuzzle = false
+}
+
+const finishPuzzle = async(message) => {
     if (puzzleAnimationId) {
         window.cancelAnimationFrame(puzzleAnimationId)
-        puzzleAnimationId = null;
+        puzzleAnimationId = null
     }
-    
     button1.style.opacity = 0
     button2.style.opacity = 0
     button3.style.opacity = 0
-    inPuzzle = false
-    // animate();
-}
 
-function handleButton2Click() {
     
+    const dialogueDisplay = document.getElementById('dialogue')
+    dialogueDisplay.textContent = message
+
+    enterMessage()
+    await delay(2000)
+    if (messageAnimationId) {
+        window.cancelAnimationFrame(messageAnimationId)
+        messageAnimationId = null
+    }
+    dialogueDisplay.style.opacity = 0
 }
 
-function handleButton3Click() {
-}
 
 function setInPuzzle(value) {
     inPuzzle = value

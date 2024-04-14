@@ -25,7 +25,7 @@ function animate() {
 animate(); // continuous run
 
 function handlePlayerInput() {
-    const offset = 4 // movement offset
+    const offset = 3 // movement offset
     player.moving = false
     if (getInPuzzle()) return
     handlePlayerMovement('w', 0, offset) // Move up
@@ -88,7 +88,7 @@ function checkPuzzle() {
             // dont break, interact
             setInPuzzle(true)    
             setButtons();
-            enterPuzzle();
+            enterPuzzle(puzzle.position);
             break;
         }
     }
