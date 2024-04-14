@@ -89,6 +89,12 @@ function enterPuzzle() {
     button2.style.opacity = 1;
     button3.style.opacity = 1;
 
+    // ontop of ui, draw message
+    const dialogueDisplay = document.getElementById('dialogue')
+    if (dialogueDisplay) {
+        dialogueDisplay.style.opacity = 1;
+    }
+
     // then draw puzzle ui
     puzzleUI.draw()
     
@@ -120,7 +126,6 @@ function setButtons() {
     const button1 = document.getElementById('button1')
     const button2 = document.getElementById('button2')
     const button3 = document.getElementById('button3')
-    const dialogueDisplay = document.getElementById('dialogue')
     button1.addEventListener('click', handleButton1Click);
     button2.addEventListener('click', handleButton2Click);
     button3.addEventListener('click', handleButton2Click);
