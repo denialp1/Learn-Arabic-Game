@@ -93,6 +93,7 @@ function enterPuzzle() {
     const dialogueDisplay = document.getElementById('dialogue')
     if (dialogueDisplay) {
         dialogueDisplay.style.opacity = 1;
+        dialogueDisplay.textContent = "Answer the Question!"
     }
 
     // then draw puzzle ui
