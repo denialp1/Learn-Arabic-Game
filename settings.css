@@ -43,3 +43,7 @@
 .btn a:link{
     text-decoration: none;
 }
+
+.slidecontainer {
+    margin-bottom: 20px;
+}

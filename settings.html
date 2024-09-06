@@ -11,7 +11,40 @@
         <button class="btn"><a href='index.html'>START</a></button>
         <button class="btn"><a href='levels.html'>LEVELS</a></button>
         <button class="btn">SETTINGS</button>
+
+        <div class="slidecontainer">
+          <!-- Game Volume Slider -->
+          <p>Game Volume: <span id="gameVolume"></span></p>
+          <input type="range" min="1" max="100" value="50" class="slider" id="gameVolumeSlider">
+        </div>
+
+        <div class="slidecontainer">
+        <!-- SFX Volume Slider -->
+          <p>SFX Volume: <span id="sfxVolume"></span></p>
+          <input type="range" min="1" max="100" value="50" class="slider" id="sfxVolumeSlider">
+        </div>
+
       </div>
     </div>
+
+    <script>
+      //Game Volume Slider
+      var volumeSlider = document.getElementById("gameVolumeSlider");
+      var volumeValue = document.getElementById("gameVolume");
+      volumeValue.innerHTML = volumeSlider.value;
+
+      volumeSlider.oninput = function() {
+        volumeValue.innerHTML = this.value;
+      }
+
+      //SFX Volume Slider
+      var SFXSlider = document.getElementById("sfxVolumeSlider");
+      var SFXValue = document.getElementById("sfxVolume");
+      SFXValue.innerHTML = SFXSlider.value;
+
+      SFXSlider.oninput = function() {
+        SFXValue.innerHTML = this.value;
+      }
+    </script>
   </body>
 </html>
