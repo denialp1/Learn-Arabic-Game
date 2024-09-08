@@ -1,5 +1,5 @@
 // initialize global audio object
-window.globalAudio = new Audio('audio/game/sample.mp3');
+window.globalAudio = new Audio('../audio/game/sample.mp3');
 window.globalAudio.loop = true;
 window.globalAudio.volume = 0;
 
