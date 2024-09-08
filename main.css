@@ -15,14 +15,14 @@
 }
 
 .content h1{
-    font-size: 100px;
+    font-size: 80px;
     color:white;
 }
 
 .btn{
     cursor: pointer;
     color: #cc0052;
-    font-size: 20px;
+    font-size: 18px;
     letter-spacing: 2px;
     padding: 10px 30px;
     border:2px solid #003333;
