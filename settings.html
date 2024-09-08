@@ -15,36 +15,18 @@
         <div class="slidecontainer">
           <!-- Game Volume Slider -->
           <p>Game Volume: <span id="gameVolume"></span></p>
-          <input type="range" min="1" max="100" value="50" class="slider" id="gameVolumeSlider">
+          <input type="range" id="gameVolumeSlider" min="0" max="1" step="0.01" value="1">
         </div>
 
         <div class="slidecontainer">
         <!-- SFX Volume Slider -->
           <p>SFX Volume: <span id="sfxVolume"></span></p>
-          <input type="range" min="1" max="100" value="50" class="slider" id="sfxVolumeSlider">
+          <input type="range" min="0" max="100" value="50" class="slider" id="sfxVolumeSlider">
         </div>
 
       </div>
-    </div>
-
-    <script>
-      //Game Volume Slider
-      var volumeSlider = document.getElementById("gameVolumeSlider");
-      var volumeValue = document.getElementById("gameVolume");
-      volumeValue.innerHTML = volumeSlider.value;
-
-      volumeSlider.oninput = function() {
-        volumeValue.innerHTML = this.value;
-      }
-
-      //SFX Volume Slider
-      var SFXSlider = document.getElementById("sfxVolumeSlider");
-      var SFXValue = document.getElementById("sfxVolume");
-      SFXValue.innerHTML = SFXSlider.value;
-
-      SFXSlider.oninput = function() {
-        SFXValue.innerHTML = this.value;
-      }
-    </script>
+    </div>    
+  <script src="audio/audio.js"></script>
+  <script src="audio/audio-settings.js"></script>
   </body>
 </html>
