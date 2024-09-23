@@ -53,8 +53,8 @@ class OverworldMap {
 
 window.OverworldMaps = {
     DemoRoom: {
-        lowerSrc: "../assets/map/DemoLower.png",
-        upperSrc: "../assets/map/DemoUpper.png",
+        lowerSrc: "../assets/map/Starter.png",
+        upperSrc: "../assets/map/StarterUpper.png",
         gameObjects: {
             player: new Person({
                 isPlayerControlled: true,
