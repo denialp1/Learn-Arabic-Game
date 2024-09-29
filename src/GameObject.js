@@ -6,7 +6,7 @@ class GameObject {
         this.direction = config.direction || "down";
         this.sprite = new Sprite({
             gameObject: this,
-            src: config.src || "../assets/characters/player.png",
+            src: config.src || "../assets/characters/character1.png",
         });
     }
 
