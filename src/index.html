@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Learn Arabic</title>
-        <link href="styles.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="game-container">
-            <canvas class="game-canvas" width="352" height="198"></canvas>
-        </div>
+  <head>
+    <title>Learn Arabic</title>
+    <link href="styles.css" type="text/css" rel="stylesheet" />
+    <style>
+      #canvas2 {
+        position: absolute; /* Change to absolute or relative as needed */
+        left: 830px; /* X position */
+        top: 800px; /* Y position */
+        border: 1px solid black; /* Optional */
+      }
+    </style>
+  </head>
 
-        <script src="utils.js"></script>
-        <script src="DirectionInput.js"></script>
-        <script src="Overworld.js"></script>
-        <script src="GameObject.js"></script>
-        <script src="Person.js"></script>
-        <script src="Sprite.js"></script>
-        <script src="OverworldMap.js"></script>
-        <script src="init.js"></script>
-    </body>
+  <body>
+    <div class="game-container">
+      <canvas
+        id="canvas1"
+        class="game-canvas"
+        width="352"
+        height="198"
+      ></canvas>
+    </div>
+
+    <div>
+      <canvas id="canvas2" width="150" height="150"></canvas>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="DirectionInput.js"></script>
+    <script src="Overworld.js"></script>
+    <script src="GameObject.js"></script>
+    <script src="Person.js"></script>
+    <script src="Sprite.js"></script>
+    <script src="OverworldMap.js"></script>
+    <script src="init.js"></script>
+    <script>
+      // Create a new image object
+      const img = new Image();
+      // Set the source to your PNG file
+      img.src = "../assets/browser/23.png"; // Replace with your PNG file name
+
+      // Wait for the image to load
+      img.onload = function () {
+        const canvas = document.getElementById("canvas2");
+        const ctx = canvas.getContext("2d");
+        // Draw the image on the canvas
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+    </script>
+  </body>
 </html>
