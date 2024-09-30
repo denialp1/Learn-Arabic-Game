@@ -11,7 +11,7 @@ class Overworld {
         const interval = 1000 / fps; // Calculate the interval in milliseconds
     
         const step = () => {
-            
+
             // Clear the Canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
@@ -49,6 +49,8 @@ class Overworld {
     init() {
         this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
         this.map.mountObjects();
+        this.map.updatePlayerSprite();
+
         this.directionInput = new DirectionInput();
         this.directionInput.init();
         this.startGameLoop();
