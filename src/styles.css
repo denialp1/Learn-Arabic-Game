@@ -17,7 +17,6 @@ body {
     outline: 1px solid #fff;
     background-color: #333;
     transform: scale(3) translateY(50%);
-    padding: 10px;
 }
 
 .game-container canvas {
@@ -36,7 +35,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
-    max-width: 300px;
+    max-width: 300px
   }
   
   @font-face {
