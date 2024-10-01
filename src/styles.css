@@ -3,7 +3,7 @@
 }
 
 body {
-    background: #333;
+    background: #e4daa2;
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -15,6 +15,7 @@ body {
     height: 198px;
     margin: 0 auto;
     outline: 1px solid #fff;
+    background-color: #333;
 
     transform: scale(3) translateY(50%)
 }
@@ -22,3 +23,25 @@ body {
 .game-container canvas {
     image-rendering: pixelated;
 }
+
+.menu-button {
+    text-decoration: none;
+    font-family: 'pixel', sans-serif;
+    background-color: #8A2E14;
+    color: white;
+    font-size: 0.4rem;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto
+  }
+  @font-face {
+    font-family: 'pixel';
+    src: url('/assets/fonts/PixelCountdown-Yaj4.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
