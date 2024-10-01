@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('gameCanvas');
+    const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     const fullscreenButton = document.getElementById('fullscreenButton');
 
