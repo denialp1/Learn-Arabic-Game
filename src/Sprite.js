@@ -29,7 +29,7 @@ class Sprite {
             "walk-up"    : [[6,2],[7,2],[8,2],[9,2],[10,2],[11,2]],
             "walk-left"  : [[12,2],[13,2],[14, 2],[15,2],[16,2],[17,2]],
         }
-        this.currentAnimation = "idle-up" // config.currentAnimation || "idle-down";
+        this.currentAnimation = "idle-up"; // config.currentAnimation || "idle-down";
         this.currentAnimationFrame = 0;
 
         this.animationFrameLimit = config.animationFrameLimit || 5; // animation speed
@@ -40,7 +40,10 @@ class Sprite {
     }
 
     get frame() {
-        return this.animations[this.currentAnimation][this.currentAnimationFrame];
+        if (!this.animations[this.currentAnimation]) {
+            console.log("x")
+        }
+        return this.animations[this.currentAnimation][this.currentAnimationFrame]
     }
 
     setAnimation(key) {
@@ -71,14 +74,14 @@ class Sprite {
         const x = this.gameObject.x + utils.withGrid(10.5) - cameraPerson.x;
         const y = this.gameObject.y - 16 + utils.withGrid(6) - cameraPerson.y;
 
-        this.isShadowLoaded && ctx.drawImage(this.shadow, x-8, y+2); 
+        this.isShadowLoaded && ctx.drawImage(this.shadow, x-8, y-2); 
 
         const [frameX, frameY] = this.frame;
 
         this.isLoaded && ctx.drawImage(this.image,
             frameX *16, frameY * 32,
             16,32,
-            x,y,
+            x,y-4,
             16,32
         )
 
