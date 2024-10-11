@@ -7,9 +7,6 @@ class Overworld {
     }
 
     startGameLoop() {
-        const fps = 120; // Set the desired frame rate (e.g., 30 FPS)
-        const interval = 1000 / fps; // Calculate the interval in milliseconds
-    
         const step = () => {
 
             // Clear the Canvas
@@ -36,14 +33,8 @@ class Overworld {
     
             // Draw Upper Layer
             this.map.drawUpperImage(this.ctx, cameraPerson);
-            
-            setTimeout(() => {
-                requestAnimationFrame(() => {
-                    step();
-                });
-            }, interval);
         }
-        step();
+        window.setInterval(step, 10);
     }
 
     init() {
