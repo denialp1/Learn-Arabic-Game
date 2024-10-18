@@ -12,23 +12,18 @@
       
       <div class="menu-buttons">
         <div class="sprite-display">
+          <button class="arrow-button arrow-left" onclick="previousCharacter()">&#9664;</button>
           <div class="crop">
-            <img src="../assets/characters/character1.png" alt="Character 1" />
+            <img id="character-image" src="../assets/characters/character1.png" alt="Character 1" />
           </div>
-          <div class="crop">
-            <img src="../assets/characters/character2.png" alt="Character 2" />
-          </div>
-          <div class="crop">
-            <img src="../assets/characters/character3.png" alt="Character 3" />
-          </div>
+          <button class="arrow-button arrow-right" onclick="nextCharacter()">&#9654;</button>
         </div>
-        <div class="menu-buttons-horiz">
-          <a href="../src/index.html?character=1" class="menu-button">Character 1</a>
-          <a href="../src/index.html?character=2" class="menu-button">Character 2</a>
-          <a href="../src/index.html?character=3" class="menu-button">Character 3</a>
-        </div>
+        <a href="../src/index.html" id="continue-button" class="menu-button">Continue</a>
         <a href="../main.html" class="back-button">BACK</a>
       </div>
     </div>
+    <script src="../src/utils.js"></script>
+    <script src="../src/Sprite.js"></script>
+    <script src="./customize.js"></script>
   </body>
 </html>

@@ -52,11 +52,8 @@ class OverworldMap {
 
     // update sprite from url after player is init
     updatePlayerSprite() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedCharacter = urlParams.get('character');
-
+        const selectedCharacter = localStorage.getItem('selectedCharacter');
         if (selectedCharacter && this.gameObjects.player) {
-            console.log("!");
             this.gameObjects.player.sprite.image.src = `../assets/characters/character${selectedCharacter}.png`;
         }
     }

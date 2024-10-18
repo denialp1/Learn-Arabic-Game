@@ -209,3 +209,23 @@
     color: rgb(0, 0, 0, 0.8);
   }
   
+  .arrow-button {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 10px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    cursor: pointer;
+    font-size: 10px;
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .arrow-button:hover {
+    background-color: var(--accent-color);
+  }
+  
+  .arrow-button:active {
+    transform: scale(0.95);
+  }
