@@ -60,18 +60,18 @@
   .menu-button {
     text-decoration: none;
     font-family: 'pixel', sans-serif;
-    background-color: var(--primary-color);
+    background-color: #9B3E24;
     color: white;
     font-size: 1.2rem;
-    border: none;
-    border-radius: 20px;
-    padding: 15px;
+    border: 2px solid #8A2E14;
+    border-radius: 25px;
+    padding: 15px 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     width: 100%;
     max-width: 300px;
-    margin: 0 auto
-  }
+    margin: 0 auto;
+}
   
   .back-button {
     text-decoration: none;
@@ -91,11 +91,13 @@
   }
   
   .menu-button:hover {
-    background-color: var(--accent-color);
+    background-color: #3A3E59;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   }
   
   .menu-button:active {
     transform: scale(0.95);
+    box-shadow: none;
   }
   
   .back-button:hover {
