@@ -1,14 +1,6 @@
   <head>
     <title>Learn Arabic</title>
     <link href="styles.css" type="text/css" rel="stylesheet" />
-    <style>
-      #canvas2 {
-        position: absolute; /* Change to absolute or relative as needed */
-        left: 830px; /* X position */
-        top: 800px; /* Y position */
-        border: 1px solid black; /* Optional */
-      }
-    </style>
   </head>
 
   <body>
@@ -19,12 +11,17 @@
         width="352"
         height="198"
       ></canvas>
+      <div id="overlay" class="overlay"></div>
+      <div class="image-container">
+        <div id="spriteDiv" class="book">
+          <div id="bookText" class="book-text">fffff</div>
+        </div>
+        <button class="arrow-button arrow-left" id="leftArr" onclick="flipLeft()">&#9664;</button>
+        <button class="arrow-button arrow-right" id="rightArr" onclick="flipRight()">&#9654;</button>
+      </div>
       <!-- <a href="#" id="fullscreenButton" class="menu-button">Toggle Fullscreen</a> -->
     </div>
 
-    <div>
-      <canvas id="canvas2" width="150" height="150"></canvas>
-    </div>
 
     <script src="utils.js"></script>
     <script src="DirectionInput.js"></script>
@@ -36,19 +33,6 @@
     <script src="OverworldEvent.js"></script>
     <script src="init.js"></script>
     <script src="Fullscreen.js"></script>
-    <script>
-      // Create a new image object
-      const img = new Image();
-      // Set the source to your PNG file
-      img.src = "../assets/browser/23.png"; // Replace with your PNG file name
-
-      // Wait for the image to load
-      img.onload = function () {
-        const canvas = document.getElementById("canvas2");
-        const ctx = canvas.getContext("2d");
-        // Draw the image on the canvas
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      };
-    </script>
+    <script src="./book/ArabicBook.js"></script>
   </body>
 </html>
