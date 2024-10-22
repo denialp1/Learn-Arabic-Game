@@ -1,6 +1,29 @@
   <head>
     <title>Learn Arabic</title>
     <link href="styles.css" type="text/css" rel="stylesheet" />
+    <style>
+      #canvas2 {
+        position: absolute; /* Change to absolute or relative as needed */
+        left: 830px; /* X position */
+        top: 800px; /* Y position */
+        border: 1px solid black; /* Optional */
+      }
+      #canvas1 {
+        position: relative;
+        left: 0px;
+        top: 0px;
+        border: 1px solid black;
+      }
+      #fullscreenButton {
+        position: absolute;
+        top: 0px;
+        right: 30px;
+        z-index: 10;
+        background-color: darkgray;
+        padding: 5px;
+        border-radius: 5px;
+      }
+    </style>
   </head>
 
   <body>
@@ -19,7 +42,7 @@
         <button class="arrow-button arrow-left" id="leftArr" onclick="flipLeft()">&#9664;</button>
         <button class="arrow-button arrow-right" id="rightArr" onclick="flipRight()">&#9654;</button>
       </div>
-      <!-- <a href="#" id="fullscreenButton" class="menu-button">Toggle Fullscreen</a> -->
+      <a href="#" id="fullscreenButton" class="menu-button">Toggle Fullscreen</a>
     </div>
 
 
