@@ -128,13 +128,13 @@ window.OverworldMaps = {
     }
 }
 
-// fetch('StarterRoomWalls.json')
-//     .then(response => response.json())
-//     .then(walls => {
-//         for (const coord in walls) {
-//             const [x, y] = coord.split(',').map(Number);
-//             window.OverworldMaps.DemoRoom.walls[`${x},${y}`] = true;
-//         }
-//         console.log(window.OverworldMaps.DemoRoom)
-//     })
-//     .catch(error => console.error('Error loading walls:', error));
+fetch('StarterRoomWalls.json')
+    .then(response => response.json())
+    .then(walls => {
+        for (const coord in walls) {
+            const [x, y] = coord.split(',').map(Number);
+            window.OverworldMaps.DemoRoom.walls[`${x},${y}`] = true;
+        }
+        console.log(window.OverworldMaps.DemoRoom)
+    })
+    .catch(error => console.error('Error loading walls:', error));
