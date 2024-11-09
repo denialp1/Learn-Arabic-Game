@@ -45,11 +45,20 @@ export class Overworld {
         window.setInterval(step, 10);
     }
 
+    bindActionInput() {
+        new KeyPressListener("Enter", () => {
+            // Is there person here to start dialogue?
+            this.map.checkForActionCutscene();
+        })
+    }
+
     init() {
         const level = localStorage.getItem('level');
         this.map = new OverworldMap(window.OverworldMaps[level]);
         this.map.mountObjects();
         this.map.updatePlayerSprite();
+
+        this.bindActionInput();
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();

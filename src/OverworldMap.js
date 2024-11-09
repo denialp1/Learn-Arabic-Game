@@ -43,9 +43,6 @@ export class OverworldMap {
     async startCutscene(events) {
         this.isCutscenePlaying = true;
 
-        // Start a loop of async events
-        // await each one
-
         for (let i = 0; i < events.length; i++) {
             const eventHandler = new OverworldEvent({
                 event: events[i],
@@ -55,6 +52,20 @@ export class OverworldMap {
         }
 
         this.isCutscenePlaying = false;
+
+        // Reset NPCs to do idle behavior
+        Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
+    }
+
+    checkForActionCutscene() {
+        const player = this.gameObjects["player"];
+        const nextCoords = utils.nextPosition(player.x, player.y, player.direction);
+        const match = Object.values(this.gameObjects).find(object => {
+            return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
+        });
+        if (!this.isCutscenePlaying && match && match.talking.length) {
+            this.startCutscene(match.talking[0].events);
+        }
     }
 
     addWall(x, y) {
@@ -90,11 +101,20 @@ window.OverworldMaps = {
                 y: utils.withGrid(13),
                 src: "../assets/characters/character3.png",
                 behaviorLoop: [
-                    { type: "walk",  direction: "left" },
+                    { type: "stand",  direction: "left", time: 500 },
                     { type: "stand",  direction: "up", time: 800 },
-                    { type: "walk",  direction: "up" },
-                    { type: "walk",  direction: "right" },
-                    { type: "walk",  direction: "down" },
+                    { type: "stand",  direction: "right", time: 1000 },
+                    { type: "stand",  direction: "up", time: 500 },
+                    { type: "stand",  direction: "left", time: 1000 },
+                ],
+                talking: [
+                    {
+                        events: [
+                            {type: "textMessage", text: "I'm busy...", facePlayer: "npc1"},
+                            {type: "textMessage", text: "Go away."},
+                            {who: "player", type: "walk", direction: "left"}
+                        ]
+                    }
                 ]
             }),
             player: new Person({
