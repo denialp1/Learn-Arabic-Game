@@ -1,4 +1,4 @@
-class OverworldMap {
+export class OverworldMap {
     constructor(config) {
         this.gameObjects = config.gameObjects;
         this.walls = config.walls || {};
@@ -9,7 +9,7 @@ class OverworldMap {
         this.upperImage = new Image();
         this.upperImage.src = config.upperSrc; // objects over the player's head
 
-        this.isCutscenePlaying = true;
+        this.isCutscenePlaying = false;
     }
 
     drawLowerImage(ctx, cameraPerson) {
@@ -104,17 +104,37 @@ window.OverworldMaps = {
             }),
         },
         walls: {}
+    },
+    grocery: {
+        lowerSrc: "../assets/map/grocery/lower.png",
+        upperSrc: "../assets/map/grocery/upper.png",
+        gameObjects: {
+            npc1: new Person({
+                x: utils.withGrid(7),
+                y: utils.withGrid(14),
+                range: 32,
+                src: "../assets/characters/character3.png",
+                behaviorLoop: [
+                    { type: "stand",  direction: "right",},
+                ]
+            }),
+            player: new Person({
+                isPlayerControlled: true,
+                x: utils.withGrid(10),
+                y: utils.withGrid(10),
+            }),
+        },
+        walls: {}
     }
 }
 
-fetch('StarterRoomWalls.json')
-    .then(response => response.json())
-    .then(walls => {
-        for (const coord in walls) {
-            const [x, y] = coord.split(',').map(Number);
-            window.OverworldMaps.DemoRoom.walls[`${x},${y}`] = true;
-        }
-        console.log(window.OverworldMaps.DemoRoom)
-    })
-    .catch(error => console.error('Error loading walls:', error));
-
+// fetch('StarterRoomWalls.json')
+//     .then(response => response.json())
+//     .then(walls => {
+//         for (const coord in walls) {
+//             const [x, y] = coord.split(',').map(Number);
+//             window.OverworldMaps.DemoRoom.walls[`${x},${y}`] = true;
+//         }
+//         console.log(window.OverworldMaps.DemoRoom)
+//     })
+//     .catch(error => console.error('Error loading walls:', error));

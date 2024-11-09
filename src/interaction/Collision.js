@@ -17,7 +17,7 @@ export function checkInteract(gameObjects, player) {
 
 // is object1 within range of object2
 function isTouching(object1, object2) {
-  const range = 16 // tolerable interaction range
+  const range = object2.range;
   const x = Math.abs(object1.x - object2.x) <= range
   const y = Math.abs(object1.y - object2.y) <= range
   return x && y
