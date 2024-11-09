@@ -109,13 +109,27 @@ window.OverworldMaps = {
         lowerSrc: "../assets/map/grocery/lower.png",
         upperSrc: "../assets/map/grocery/upper.png",
         gameObjects: {
-            npc1: new Person({
+            clerk: new Person({
                 x: utils.withGrid(7),
                 y: utils.withGrid(14),
                 range: 32,
-                src: "../assets/characters/character3.png",
+                src: "../assets/characters/clerk.png",
                 behaviorLoop: [
                     { type: "stand",  direction: "right",},
+                ]
+            }),
+            kareem: new Person({
+                x: utils.withGrid(16),
+                y: utils.withGrid(6),
+                range: 16,
+                src: "../assets/characters/kareem.png",
+                behaviorLoop: [
+                    { type: "walk",  direction: "left" },
+                    { type: "walk",  direction: "left" },
+                    { type: "stand",  direction: "up", time: 1000 },
+                    { type: "walk",  direction: "right" },
+                    { type: "walk",  direction: "right" },
+                    { type: "stand",  direction: "up", time: 1000 },
                 ]
             }),
             player: new Person({
