@@ -56,6 +56,18 @@ class OverworldEvent {
       })
       message.init( document.querySelector(".game-container") )
     }
+
+    dragDropQuiz(resolve) {
+      if (this.event.facePlayer) {
+        const obj = this.map.gameObjects[this.event.facePlayer];
+        obj.direction = utils.towardsPlayer(this.map.gameObjects.player, obj)
+      }
+      const quiz = new DragDropQuiz({
+        text: this.event.text,
+        onComplete: () => resolve()
+      })
+      quiz.init( document.querySelector(".game-container") )
+    }
   
     init() {
       return new Promise(resolve => {
