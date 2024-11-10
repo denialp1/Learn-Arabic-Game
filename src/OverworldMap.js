@@ -61,7 +61,7 @@ export class OverworldMap {
         const player = this.gameObjects["player"];
         const nextCoords = utils.nextPosition(player.x, player.y, player.direction);
         const match = Object.values(this.gameObjects).find(object => {
-            return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
+            return utils.isTouching(player, object)
         });
         if (!this.isCutscenePlaying && match && match.talking.length) {
             this.startCutscene(match.talking[0].events);
@@ -136,6 +136,13 @@ window.OverworldMaps = {
                 src: "../assets/characters/clerk.png",
                 behaviorLoop: [
                     { type: "stand",  direction: "right",},
+                ],
+                talking: [
+                    {
+                        events: [
+                            {type: "textMessage", text: "Start Quiz here.", facePlayer: "clerk"},
+                        ]
+                    }
                 ]
             }),
             kareem: new Person({
@@ -150,6 +157,14 @@ window.OverworldMaps = {
                     { type: "walk",  direction: "right" },
                     { type: "walk",  direction: "right" },
                     { type: "stand",  direction: "up", time: 1000 },
+                ],
+                talking: [
+                    {
+                        events: [
+                            {type: "textMessage", text: "I'm busy...", facePlayer: "kareem"},
+                            {type: "textMessage", text: "Go away."},
+                        ]
+                    }
                 ]
             }),
             player: new Person({

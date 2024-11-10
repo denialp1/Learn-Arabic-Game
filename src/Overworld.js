@@ -46,7 +46,7 @@ export class Overworld {
     }
 
     bindActionInput() {
-        new KeyPressListener("Enter", () => {
+        new KeyPressListener("KeyE", () => {
             // Is there person here to start dialogue?
             this.map.checkForActionCutscene();
         })

@@ -26,10 +26,22 @@ const utils = {
         if (direction === "up") { return "down" }
         return "up"
     },
+    towardsPlayer(player, obj) {
+        if (player.y < obj.y) { return "up" }
+        else if (player.y > obj.y) { return "down" }
+        else if (player.x < obj.x) { return "left" }
+        else if (player.x > obj.x) { return "right" }
+    },
     emitEvent(name, detail) {
     const event = new CustomEvent(name, {
       detail
     });
     document.dispatchEvent(event);
+  },
+  isTouching(object1, object2) {
+    const range = object2.range;
+    const x = Math.abs(object1.x - object2.x) <= range
+    const y = Math.abs(object1.y - object2.y) <= range
+    return x && y
   }
 }
