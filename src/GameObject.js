@@ -4,6 +4,7 @@ class GameObject {
         this.isMounted = false;
         this.x = config.x || 0;
         this.y = config.y || 0;
+        this.range = config.range || 0; // interactable range
         this.direction = config.direction || "down";
         this.sprite = new Sprite({
             gameObject: this,

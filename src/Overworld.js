@@ -1,4 +1,6 @@
 import { checkInteract } from "./interaction/Collision.js";
+import { OverworldMap } from "./OverworldMap.js";
+import groceryWalls from '../assets/map/grocery/walls.js';
 
 export class Overworld {
     constructor(config) {
@@ -44,14 +46,15 @@ export class Overworld {
     }
 
     bindActionInput() {
-        new KeyPressListener("Enter", () => {
+        new KeyPressListener("KeyE", () => {
             // Is there person here to start dialogue?
             this.map.checkForActionCutscene();
         })
     }
 
     init() {
-        this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
+        const level = localStorage.getItem('level');
+        this.map = new OverworldMap(window.OverworldMaps[level]);
         this.map.mountObjects();
         this.map.updatePlayerSprite();
 
@@ -61,15 +64,23 @@ export class Overworld {
         this.directionInput.init();
         this.startGameLoop();
 
-        this.map.startCutscene([
-            { who: "player", type: "walk", direction: "down" },
-            { who: "player", type: "walk", direction: "down" },
-            { who: "npc1", type: "walk", direction: "left" },
-            { who: "npc1", type: "walk", direction: "left" },
-            { who: "npc1", type: "walk", direction: "left" },
-            { who: "npc1", type: "walk", direction: "left" },
-            { who: "npc1", type: "stand", direction: "up", time: 300 },
-            { type: "textMessage", text: "hello!"},
-        ])
+        if (level == "DemoRoom") {
+            cutscene1(this.map);
+        }
+        if (level == "grocery") {
+            this.map.walls = groceryWalls;;
+        }
     }
+}
+
+function cutscene1(map) {
+    map.startCutscene([
+        { who: "player", type: "walk", direction: "down" },
+        { who: "player", type: "walk", direction: "down" },
+        { who: "npc1", type: "walk", direction: "left" },
+        { who: "npc1", type: "walk", direction: "left" },
+        { who: "npc1", type: "walk", direction: "left" },
+        { who: "npc1", type: "walk", direction: "left" },
+        { who: "npc1", type: "stand", direction: "up", time: 800 },
+    ])
 }

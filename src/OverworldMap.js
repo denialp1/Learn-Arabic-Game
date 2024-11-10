@@ -1,4 +1,4 @@
-class OverworldMap {
+export class OverworldMap {
     constructor(config) {
         this.gameObjects = config.gameObjects;
         this.walls = config.walls || {};
@@ -61,7 +61,7 @@ class OverworldMap {
         const player = this.gameObjects["player"];
         const nextCoords = utils.nextPosition(player.x, player.y, player.direction);
         const match = Object.values(this.gameObjects).find(object => {
-            return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
+            return utils.isTouching(player, object)
         });
         if (!this.isCutscenePlaying && match && match.talking.length) {
             this.startCutscene(match.talking[0].events);
@@ -124,6 +124,56 @@ window.OverworldMaps = {
             }),
         },
         walls: {}
+    },
+    grocery: {
+        lowerSrc: "../assets/map/grocery/lower.png",
+        upperSrc: "../assets/map/grocery/upper.png",
+        gameObjects: {
+            clerk: new Person({
+                x: utils.withGrid(7),
+                y: utils.withGrid(14),
+                range: 32,
+                src: "../assets/characters/clerk.png",
+                behaviorLoop: [
+                    { type: "stand",  direction: "right",},
+                ],
+                talking: [
+                    {
+                        events: [
+                            {type: "textMessage", text: "Start Quiz here.", facePlayer: "clerk"},
+                        ]
+                    }
+                ]
+            }),
+            kareem: new Person({
+                x: utils.withGrid(16),
+                y: utils.withGrid(6),
+                range: 16,
+                src: "../assets/characters/kareem.png",
+                behaviorLoop: [
+                    { type: "walk",  direction: "left" },
+                    { type: "walk",  direction: "left" },
+                    { type: "stand",  direction: "up", time: 1000 },
+                    { type: "walk",  direction: "right" },
+                    { type: "walk",  direction: "right" },
+                    { type: "stand",  direction: "up", time: 1000 },
+                ],
+                talking: [
+                    {
+                        events: [
+                            {type: "textMessage", text: "I'm busy...", facePlayer: "kareem"},
+                            {type: "textMessage", text: "Go away."},
+                        ]
+                    }
+                ]
+            }),
+            player: new Person({
+                isPlayerControlled: true,
+                x: utils.withGrid(10),
+                y: utils.withGrid(10),
+            }),
+        },
+        walls: {}
     }
 }
 
@@ -137,4 +187,3 @@ fetch('StarterRoomWalls.json')
         console.log(window.OverworldMaps.DemoRoom)
     })
     .catch(error => console.error('Error loading walls:', error));
-
