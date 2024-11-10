@@ -1,4 +1,6 @@
-class Overworld {
+import { checkInteract } from "./interaction/Collision.js";
+
+export class Overworld {
     constructor(config) {
         this.element = config.element;
         this.canvas = config.element.querySelector(".game-canvas");
@@ -35,6 +37,8 @@ class Overworld {
     
             // Draw Upper Layer
             this.map.drawUpperImage(this.ctx, cameraPerson);
+
+            checkInteract(this.map.gameObjects,this.map.gameObjects.player)
         }
         window.setInterval(step, 10);
     }

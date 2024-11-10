@@ -2,6 +2,8 @@ class Person extends GameObject {
     constructor(config) {
         super(config);
         this.movingProgressRemaining = 0;
+      
+        this.interact = false;
         this.isStanding = false;
         
         this.isPlayerControlled = config.isPlayerControlled || false;
@@ -55,7 +57,7 @@ class Person extends GameObject {
           this.updateSprite(state);
 
           if(this.isPlayerControlled) {
-            console.log(utils.nextPosition(this.x, this.y, this.direction)) // Player Position for Debugging
+            // console.log(utils.nextPosition(this.x, this.y, this.direction)) // Player Position for Debugging
           }
         }
     
@@ -90,7 +92,9 @@ class Person extends GameObject {
           this.sprite.setAnimation("walk-"+this.direction);
           return;
         }
-        this.sprite.setAnimation("idle-"+this.direction);    
+        if(!this.interact) {
+          this.sprite.setAnimation("idle-"+this.direction);
+        }    
       }
     
     }

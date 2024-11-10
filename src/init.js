@@ -1,3 +1,4 @@
+import { Overworld } from './Overworld.js';
 (function () {
 
     const overworld = new Overworld({
