@@ -60,6 +60,11 @@ class DragDropQuiz {
                 this.done();
             }
         })
+
+        this.actionListener = new KeyPressListener("Escape", () => {
+            this.actionListener.unbind();
+            this.done();
+        })
     }
 
     addScript() {
