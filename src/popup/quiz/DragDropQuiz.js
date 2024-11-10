@@ -69,7 +69,7 @@ class DragDropQuiz {
 
     addScript() {
         var script = document.createElement('script');
-        script.src = 'DragDropQuizScript.js';
+        script.src = './popup/quiz/DragDropQuizScript.js';
         this.element.appendChild(script);
     }
     done() {

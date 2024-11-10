@@ -183,7 +183,7 @@ window.OverworldMaps = {
     }
 }
 
-fetch('StarterRoomWalls.json')
+fetch('./data/walls/StarterRoomWalls.json')
     .then(response => response.json())
     .then(walls => {
         for (const coord in walls) {
