@@ -4,7 +4,9 @@ let interactable = null;
 export function checkInteract(gameObjects, player) {
   interactable = null;
   Object.values(gameObjects).forEach(object => { // loop through game objects
+
     if (object != player && utils.isTouching(player, object)) {
+
       highlight(object); // highlight if touching
     } else {
       clear(object);
