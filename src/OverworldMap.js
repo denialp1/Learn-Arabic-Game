@@ -59,12 +59,15 @@ export class OverworldMap {
 
     checkForActionCutscene() {
         const player = this.gameObjects["player"];
-        const nextCoords = utils.nextPosition(player.x, player.y, player.direction);
         const match = Object.values(this.gameObjects).find(object => {
             return utils.isTouching(player, object)
         });
+        console.log(match.quiz)
         if (!this.isCutscenePlaying && match && match.talking.length) {
             this.startCutscene(match.talking[0].events);
+        }
+        if (!this.isCutscenePlaying && match && match.quiz.length) {
+            this.startCutscene(match.quiz[0].events);
         }
     }
 
@@ -115,7 +118,8 @@ window.OverworldMaps = {
                             {who: "player", type: "walk", direction: "left"}
                         ]
                     }
-                ]
+                ],
+                quiz: [ {} ]
             }),
             player: new Person({
                 isPlayerControlled: true,
@@ -137,10 +141,11 @@ window.OverworldMaps = {
                 behaviorLoop: [
                     { type: "stand",  direction: "right",},
                 ],
-                talking: [
+                talking: [],
+                quiz: [
                     {
                         events: [
-                            {type: "textMessage", text: "Start Quiz here.", facePlayer: "clerk"},
+                            {type: "dragDropQuiz", text: "title"},
                         ]
                     }
                 ]
@@ -165,7 +170,8 @@ window.OverworldMaps = {
                             {type: "textMessage", text: "Go away."},
                         ]
                     }
-                ]
+                ],
+                quiz : [ {} ]
             }),
             player: new Person({
                 isPlayerControlled: true,

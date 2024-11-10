@@ -15,6 +15,7 @@ class GameObject {
         this.behaviorLoopIndex = 0;
 
         this.talking = config.talking || [];
+        this.quiz = config.quiz || [];
     }
 
     mount(map) {
