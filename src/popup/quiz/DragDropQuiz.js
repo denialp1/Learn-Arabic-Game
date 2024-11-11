@@ -7,35 +7,35 @@ class DragDropQuiz {
     }
 
     createElement() {
-        //Create the element
+        // Create the element
         this.element = document.createElement("div");
         this.element.classList.add("DragDropQuiz");
-
+    
         this.element.innerHTML = (`
             <h2>Can you translate "Hello. My name is Olivia?"</h2>
             <p>Drag and drop answers into the right boxes. Click on an answer to reset.</p>
-
+    
             <div class="draggable-container">
                 <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
                     Hello
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
+                <div class="draggable" id="word2" draggable="true" data-in-drop-zone="false">
                     My
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
+                <div class="draggable" id="word3" draggable="true" data-in-drop-zone="false">
                     name
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
+                <div class="draggable" id="word4" draggable="true" data-in-drop-zone="false">
                     is
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
+                <div class="draggable" id="word5" draggable="true" data-in-drop-zone="false">
                     Olivia
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
+                <div class="draggable" id="word6" draggable="true" data-in-drop-zone="false">
                     .
                 </div>
             </div>
-
+    
             <div class="sentence-builder">
                 <div class="drop-zone" id="drop1"></div>
                 <div class="drop-zone" id="drop2"></div>
@@ -44,23 +44,21 @@ class DragDropQuiz {
                 <div class="drop-zone" id="drop5"></div>
                 <div class="drop-zone" id="drop6"></div>
             </div>
-
+    
             <!-- Submit Button -->
             <button id="submit-btn">Submit</button>
-
+    
             <div id="feedback"></div>
-
-            
-        `)
-
+        `);
+    
         this.addScript();
-
+    
         this.element.querySelector("button").addEventListener("click", () => {
             if(this.element.querySelector("#feedback").style.color === "green") {
                 this.done();
             }
         })
-
+    
         this.actionListener = new KeyPressListener("Escape", () => {
             this.actionListener.unbind();
             this.done();
