@@ -7,14 +7,14 @@ class DragDropQuiz {
     }
 
     createElement() {
-        //Create the element
+        // Create the element
         this.element = document.createElement("div");
         this.element.classList.add("DragDropQuiz");
-
+    
         this.element.innerHTML = (`
             <h2>Translate "Hello. My name is Olivia."</h2>
             <p>Drag and drop answers into the right boxes. Click on an answer to reset.</p>
-
+    
             <div class="draggable-container">
                 <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
                     مرحبا
@@ -32,7 +32,7 @@ class DragDropQuiz {
                     أوليڤيا
                 </div>
             </div>
-
+    
             <div class="sentence-builder">
                 <div class="drop-zone" id="drop1"></div>
                 <div class="drop-zone" id="drop2"></div>
@@ -40,23 +40,21 @@ class DragDropQuiz {
                 <div class="drop-zone" id="drop4"></div>
                 <div class="drop-zone" id="drop5"></div>
             </div>
-
+    
             <!-- Submit Button -->
             <button id="submit-btn">Submit</button>
-
+    
             <div id="feedback"></div>
-
-            
-        `)
-
+        `);
+    
         this.addScript();
-
+    
         this.element.querySelector("button").addEventListener("click", () => {
             if(this.element.querySelector("#feedback").style.color === "green") {
                 this.done();
             }
         })
-
+    
         this.actionListener = new KeyPressListener("Escape", () => {
             this.actionListener.unbind();
             this.done();
