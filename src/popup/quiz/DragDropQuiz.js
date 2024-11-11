@@ -12,27 +12,24 @@ class DragDropQuiz {
         this.element.classList.add("DragDropQuiz");
 
         this.element.innerHTML = (`
-            <h2>Can you translate "Hello. My name is Olivia?"</h2>
+            <h2>Translate "Hello. My name is Olivia."</h2>
             <p>Drag and drop answers into the right boxes. Click on an answer to reset.</p>
 
             <div class="draggable-container">
                 <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    Hello
+                    مرحبا
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    My
+                <div class="draggable" id="word2" draggable="true" data-in-drop-zone="false">
+                    أنا
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    name
+                <div class="draggable" id="word3" draggable="true" data-in-drop-zone="false">
+                    إسم
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    is
+                <div class="draggable" id="word4" draggable="true" data-in-drop-zone="false">
+                    ي
                 </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    Olivia
-                </div>
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    .
+                <div class="draggable" id="word5" draggable="true" data-in-drop-zone="false">
+                    أوليڤيا
                 </div>
             </div>
 
@@ -42,7 +39,6 @@ class DragDropQuiz {
                 <div class="drop-zone" id="drop3"></div>
                 <div class="drop-zone" id="drop4"></div>
                 <div class="drop-zone" id="drop5"></div>
-                <div class="drop-zone" id="drop6"></div>
             </div>
 
             <!-- Submit Button -->

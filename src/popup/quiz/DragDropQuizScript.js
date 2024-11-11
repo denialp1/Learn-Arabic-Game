@@ -5,7 +5,7 @@ var submitBtn = document.getElementById('submit-btn');
 var feedback = document.getElementById('feedback');
 
 // Correct answer for checking (new sentence)
-var correctAnswer = ["Hello", "My", "name", "is", "Olivia", "."];
+var correctAnswer = ["أوليڤيا", "ي", "إسم", "أنا", "مرحبا"]; 
 
 // Set up drag-and-drop functionality
 draggableWords.forEach(word => {
