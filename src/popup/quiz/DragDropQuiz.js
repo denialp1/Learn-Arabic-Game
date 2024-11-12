@@ -54,7 +54,7 @@ class DragDropQuiz {
         this.addScript();
     
         this.element.querySelector("button").addEventListener("click", () => {
-            if(this.element.querySelector("#feedback").style.color === "green") {
+            if (this.element.querySelector("#feedback").style.color === "green") {
                 this.done();
             }
         })
