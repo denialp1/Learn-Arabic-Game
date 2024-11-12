@@ -16,12 +16,24 @@ class DragDropQuiz {
             <p>Drag and drop answers into the right boxes. Click on an answer to reset.</p>
     
             <div class="draggable-container">
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">Hello</div>
-                <div class="draggable" id="word2" draggable="true" data-in-drop-zone="false">My</div>
-                <div class="draggable" id="word3" draggable="true" data-in-drop-zone="false">name</div>
-                <div class="draggable" id="word4" draggable="true" data-in-drop-zone="false">is</div>
-                <div class="draggable" id="word5" draggable="true" data-in-drop-zone="false">Olivia</div>
-                <div class="draggable" id="word6" draggable="true" data-in-drop-zone="false">.</div>
+                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
+                    Hello
+                </div>
+                <div class="draggable" id="word2" draggable="true" data-in-drop-zone="false">
+                    My
+                </div>
+                <div class="draggable" id="word3" draggable="true" data-in-drop-zone="false">
+                    name
+                </div>
+                <div class="draggable" id="word4" draggable="true" data-in-drop-zone="false">
+                    is
+                </div>
+                <div class="draggable" id="word5" draggable="true" data-in-drop-zone="false">
+                    Olivia
+                </div>
+                <div class="draggable" id="word6" draggable="true" data-in-drop-zone="false">
+                    .
+                </div>
             </div>
     
             <div class="sentence-builder">
