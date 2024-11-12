@@ -1,6 +1,6 @@
 class DragDropQuiz {
     constructor( {text, onComplete} ) {
-        this.text = text;
+        this.text = text; // use this to pass in parameters instead of "Hello, my, name, is, Olivia, ."
         this.onComplete = onComplete;
         this.element = null;
         this.script = null;
