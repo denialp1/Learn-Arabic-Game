@@ -28,7 +28,7 @@ class DragDropQuiz {
             <br>
             <div id="container"></div>    
             <footer>
-                <div class="skip_button" >SKIP</div>
+                <div class="skip_button" >Exit</div>
                 <button class="check_button" id="check-btn">CHECK</button>
             </footer>
             <div id="feedback"></div>
@@ -36,31 +36,43 @@ class DragDropQuiz {
     
         this.addScriptStyle();
         this.setImg();
-    
-        this.element.querySelector("button").addEventListener("click", () => {
-            if (this.element.querySelector("#feedback").style.color === "green") {
-                this.done();
-            }
-        })
-    
+        this.setButtons();
+
         this.actionListener = new KeyPressListener("Escape", () => {
             this.actionListener.unbind();
             this.done();
         })
     }
 
-
+    // load scripts and links to css, need timestamps to prevent caching and load fresh
     async addScriptStyle() {
-        var script = document.createElement('script');
-        script.type="module";
-        script.src = './popup/quiz/script.js';
-
+        const script = document.createElement('script');
+        script.type = "module";
+        script.src = `./popup/quiz/script.js?timestamp=${new Date().getTime()}`;
+        this.element.appendChild(script);
+    
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = './popup/quiz/styles.css';
+        link.href = `./popup/quiz/styles.css?timestamp=${new Date().getTime()}`;
+        this.element.appendChild(link);
+    }   
 
-        this.element.appendChild(link)
-        this.element.appendChild(script);
+    // set skip, check buttons
+    setButtons() {
+        // check button
+        const checkButton = this.element.querySelector("#check-btn");
+        checkButton.addEventListener("click", () => {
+            setTimeout(() => {
+                if (this.element.querySelector("#feedback").style.color === "green") {
+                    this.done();
+                }
+            }, 1000); // short delay to let DOM update
+        });
+    
+        // renamed skip to exit, just exit
+        this.element.querySelector(".skip_button").addEventListener("click", () => {
+            this.done();
+        });
     }
 
     setImg() { // set image in quiz

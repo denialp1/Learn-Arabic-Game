@@ -62,13 +62,13 @@ function checkAnswer() {
     }
 
     if (userAnswer.join(" ") === answer.join(" ")) {
-      feedback.style.display = "block"; 
-      feedback.textContent = "Good Job! 🎉";
       feedback.style.color = "green";
-    } else {
+      feedback.textContent = "Good Job! 🎉";
       feedback.style.display = "block"; 
-      feedback.textContent = "Try Again! 😅";
+    } else {
       feedback.style.color = "red";
+      feedback.textContent = "Try Again! 😅";
+      feedback.style.display = "block"; 
       setTimeout(function(){ // hide for retry
         feedback.style.display = "none"; 
        }, 1000);
