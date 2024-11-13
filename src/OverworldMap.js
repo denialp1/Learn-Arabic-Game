@@ -145,7 +145,9 @@ window.OverworldMaps = {
                 quiz: [
                     {
                         events: [
-                            {type: "dragDropQuiz", text: "title", imgpath: "../assets/characters/clerk.png"},
+                            {type: "dragDropQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/clerk.png",},
                         ]
                     }
                 ]

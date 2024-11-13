@@ -16,12 +16,13 @@ class DragDropQuiz {
         this.element.classList.add("DragDropQuiz");
 
         this.element.innerHTML = (`
-            <h2 class="quiz-title">Translate Into Arabic<h2>
+            <h2 class="quiz-title" id="quiz-title"><h2>
             <div class="image_text__container">
                 <div class="crop">
                     <img id="npc" alt="npc">
                  </div>
-                <div class="prompt" id="sentence"></div>
+                <div class="prompt" id="sentence"></div>    
+                <div id="exercise-num">1</div>
             </div>
             <br>
             <div class="line" id="input"></div>
@@ -61,9 +62,11 @@ class DragDropQuiz {
     setButtons() {
         // check button
         const checkButton = this.element.querySelector("#check-btn");
+        checkButton.setAttribute("data-active", "true"); // use to check when to exit
         checkButton.addEventListener("click", () => {
             setTimeout(() => {
-                if (this.element.querySelector("#feedback").style.color === "green") {
+                if (checkButton.getAttribute("data-active") === "false") {
+                    // console.log("done");
                     this.done();
                 }
             }, 1000); // short delay to let DOM update
@@ -77,6 +80,7 @@ class DragDropQuiz {
 
     setImg() { // set image in quiz
         const img = this.element.querySelector("#npc");
+        img.style.display = "none";
         img.src = this.imgpath;
     }
 
