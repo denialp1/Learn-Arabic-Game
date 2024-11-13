@@ -175,8 +175,8 @@ window.OverworldMaps = {
             }),
             player: new Person({
                 isPlayerControlled: true,
-                x: utils.withGrid(10),
-                y: utils.withGrid(10),
+                x: utils.withGrid(9),
+                y: utils.withGrid(14),
             }),
         },
         walls: {}

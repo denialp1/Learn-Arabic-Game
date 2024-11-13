@@ -51,3 +51,11 @@ body {
   font-weight: bold;
   font-style: normal;
 }
+
+
+@font-face {
+    font-family: 'arabic';
+    src: url('/assets/fonts/arabic/Arabic\ Pixel\ 2.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }

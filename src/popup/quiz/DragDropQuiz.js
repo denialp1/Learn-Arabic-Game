@@ -4,17 +4,26 @@ class DragDropQuiz {
         this.onComplete = onComplete;
         this.element = null;
         this.script = null;
+        const overlay = document.getElementById('overlay');
     }
 
     createElement() {
+        overlay.style.display = 'block'; // dim overlay
+
         // Create the element
         this.element = document.createElement("div");
         this.element.classList.add("DragDropQuiz");
     
         this.element.innerHTML = (`
-            <h2>Translate "Hello. My name is Olivia."</h2>
-            <p>Drag and drop answers into the right boxes. Click on an answer to reset.</p>
+            <h2 class="quiz-title">Translate<h2>
+            <p class="quiz-instructions">Drag and drop answers in the right order. Click on an answer to reset.</p>
+            <p class="quiz-prompt"> "Hello. My name is Olivia."</p>
     
+            
+            <div class="sentence-builder">
+                <div class="drop-zone" id="drop-zone"></div>
+            </div>
+
             <div class="draggable-container">
                 <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
                     مرحبا
@@ -33,16 +42,9 @@ class DragDropQuiz {
                 </div>
             </div>
     
-            <div class="sentence-builder">
-                <div class="drop-zone" id="drop1"></div>
-                <div class="drop-zone" id="drop2"></div>
-                <div class="drop-zone" id="drop3"></div>
-                <div class="drop-zone" id="drop4"></div>
-                <div class="drop-zone" id="drop5"></div>
-            </div>
     
             <!-- Submit Button -->
-            <button id="submit-btn">Submit</button>
+            <button class="submit-button" id="submit-btn">Submit</button>
     
             <div id="feedback"></div>
         `);
@@ -68,6 +70,7 @@ class DragDropQuiz {
     }
     done() {
         this.element.remove();
+        overlay.style.display = 'none';
         this.onComplete();
     }
 

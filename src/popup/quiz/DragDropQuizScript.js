@@ -1,6 +1,6 @@
-// Get all draggable words, drop zones, submit button, and feedback area
+// Get all draggable words, the single drop zone, submit button, and feedback area
 var draggableWords = document.querySelectorAll('.draggable');
-var dropZones = document.querySelectorAll('.drop-zone');
+var dropZone = document.getElementById('drop-zone'); // Single drop zone
 var submitBtn = document.getElementById('submit-btn');
 var feedback = document.getElementById('feedback');
 
@@ -13,20 +13,28 @@ draggableWords.forEach(word => {
     word.addEventListener('dragend', dragEnd);
 });
 
-dropZones.forEach(zone => {
-    zone.addEventListener('dragover', dragOver);
-    zone.addEventListener('drop', drop);
-    zone.addEventListener('click', removeWord);  // Allow removal on click
-});
+dropZone.addEventListener('dragover', dragOver);
+dropZone.addEventListener('drop', drop);
+dropZone.addEventListener('click', removeWord);  // Allow removal on click
 
 // Allow the word to be dragged
 function dragStart(e) {
     e.dataTransfer.setData('text', e.target.id); // Store the id of the dragged element
     e.target.style.opacity = 0.5; // Make the word slightly transparent while dragging
+    e.target.classList.add('dragging'); // Add a class for visual changes during dragging
+
+    // Offset the draggable image to the right by modifying the position
+    e.target.style.position = 'absolute'; // Change to absolute positioning
+    e.target.style.left = (e.clientX + 10) + 'px'; // Offset by 10px to the right
+    e.target.style.top = (e.clientY - e.target.offsetHeight / 2) + 'px'; // Center vertically based on mouse position
 }
 
 function dragEnd(e) {
     e.target.style.opacity = 1; // Reset opacity after dragging
+    e.target.classList.remove('dragging'); // Remove the dragging class to reset styles
+    e.target.style.position = ''; // Reset position to default
+    e.target.style.left = ''; // Reset the left offset
+    e.target.style.top = ''; // Reset the top offset
 }
 
 // Allow the drop
@@ -39,10 +47,10 @@ function drop(e) {
     var draggedId = e.dataTransfer.getData('text');
     var draggedWord = document.getElementById(draggedId);
 
-    // Only allow drop if the zone is empty and the word is draggable
-    if (!e.target.innerHTML && draggedWord && draggedWord.getAttribute('data-in-drop-zone') === 'false') {
-        e.target.appendChild(draggedWord);
-        draggedWord.setAttribute('data-in-drop-zone', 'true'); // Mark it as dropped in a zone
+    // Only allow drop if the word is draggable and hasn't been dropped already
+    if (draggedWord && draggedWord.getAttribute('data-in-drop-zone') === 'false') {
+        dropZone.appendChild(draggedWord);  // Add to the single drop zone
+        draggedWord.setAttribute('data-in-drop-zone', 'true'); // Mark it as dropped
     }
 }
 
@@ -50,8 +58,7 @@ function drop(e) {
 function removeWord(e) {
     if (e.target && e.target.classList.contains('draggable')) {
         const word = e.target;
-        const wordId = word.id;
-        word.setAttribute('data-in-drop-zone', 'false'); // Mark the word as not in a drop zone
+        word.setAttribute('data-in-drop-zone', 'false'); // Mark the word as not in the drop zone
         document.querySelector('.draggable-container').appendChild(word); // Move the word back to the draggable container
         word.style.visibility = 'visible'; // Ensure it is visible
     }
@@ -61,18 +68,13 @@ function removeWord(e) {
 submitBtn.addEventListener('click', checkAnswer);
 
 function checkAnswer() {
-    const userAnswer = Array.from(dropZones).map(zone => zone.textContent.trim());
+    // Get the sequence of words in the drop zone
+    const userAnswer = Array.from(dropZone.children).map(word => word.textContent.trim());
 
-    // Ensure the words remain draggable and can still be rearranged after submission
+    // Reset draggable attributes to allow rearrangement
     draggableWords.forEach(word => {
         word.setAttribute('draggable', 'true');
         word.style.cursor = 'move';
-    });
-
-    // Allow drag and drop again even after submit
-    dropZones.forEach(zone => {
-        zone.addEventListener('dragover', dragOver);
-        zone.addEventListener('drop', drop);
     });
 
     // Check if the user’s answer matches the correct answer
@@ -84,14 +86,3 @@ function checkAnswer() {
         feedback.style.color = "red";
     }
 }
-
-// Re-enable words in drop zones to be dragged back into the draggable container
-dropZones.forEach(zone => {
-    zone.addEventListener('dragstart', (e) => {
-        const word = e.target;
-        if (word.classList.contains('draggable')) {
-            word.setAttribute('data-in-drop-zone', 'false');
-            document.querySelector('.draggable-container').appendChild(word); // Put back in the answer bank
-        }
-    });
-});
