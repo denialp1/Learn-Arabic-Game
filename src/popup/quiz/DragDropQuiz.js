@@ -22,7 +22,7 @@ class DragDropQuiz {
                     <img id="npc" alt="npc">
                  </div>
                 <div class="prompt" id="sentence"></div>    
-                <div id="exercise-num">1</div>
+                <div id="exercise-num"></div>
             </div>
             <br>
             <div class="line" id="input"></div>
@@ -60,6 +60,11 @@ class DragDropQuiz {
 
     // set skip, check buttons
     setButtons() {
+        // counter
+        const counter = this.element.querySelector("#exercise-num");
+        counter.textContent = 1;
+        counter.style.display = "none";
+
         // check button
         const checkButton = this.element.querySelector("#check-btn");
         checkButton.setAttribute("data-active", "true"); // use to check when to exit
