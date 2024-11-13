@@ -1,0 +1,218 @@
+@font-face {
+    font-family: "FeatherBold";
+    src: url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.eot");
+    src: url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/14936bb7a4b6575fd2eee80a3ab52cc2.svg#Feather Bold")format("svg");
+}
+
+:root {
+    --primary-color: #8A2E14;
+    --primary-darker-color: #6a1f0a;
+    --secondary-color: #D2B48C;
+    --accent-color: #3A3E59;
+    --accent-shadow: #1d234b;
+    --underline: #6f71798f;
+    --grey-color: rgb(228, 228, 228);
+    --darker-grey-color: rgb(189, 189, 189);
+    --text-color: rgb(60, 60, 60);
+    --border-radius: 7px;
+    --font-norm: 7px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    font-family: "Fredoka";
+    color: var(--text-color);
+  }
+
+.DragDropQuiz {
+    position: absolute;
+    left: 5;
+    right: 5;
+    bottom: 10;
+    top: 5;
+    height: 94%;
+    font-size: var(--font-norm);
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+    font-family: 'FeatherBold', sans-serif;
+    color: var(black);
+}
+
+.title {
+    font-size: 12;
+    margin-bottom: -8;
+}
+
+.prompt {
+    font-size: 7;
+    position: relative;
+    border: 1px solid var(--grey-color);
+    background-color: white;
+    margin: 0 0.2em;
+    margin-top: auto;
+    padding: 0.5em 1em;
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0.2px 0px 0px var(--grey-color);
+    transition: 0.2s transform ease-in-out;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: var(--underline);
+}
+
+.line {
+    width: 100%;
+    height: 20px;
+    border-bottom: 1px solid var(--underline);
+    border-top: 1px solid var(--underline);
+    border-color: var(--grey-color);
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+.word {
+    position: relative;
+    border: 1px solid var(--grey-color);
+    background-color: white;
+    margin: 0 0.2em;
+    padding: 0.5em 1em;
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0.2px 0px 0px var(--grey-color);
+    transition: 0.2s transform ease-in-out;
+    cursor: pointer;
+    font-family: 'FeatherBold', sans-serif;
+    z-index: 1;
+    font-size: var(--font-norm);
+    font-weight: 100;
+}
+  
+.word__container {
+    margin: 0 0.2em;
+    padding: 0.5em 1em;
+    border-radius: var(--border-radius);
+}
+  
+.word__container:empty {
+    background: var(--grey-color);
+}
+  
+.word:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+.TextMessage_button {
+    margin: 0;
+    font-size: px;
+    padding: 0;
+    background: none;
+    border: 0;
+    font-family: inherit;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    right: 2px;
+    bottom: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 0;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4% 0;
+}
+  
+.skip_button,
+.check_button {
+    font-size: var(--font-norm);
+    font-weight: 600;
+    padding: 0.8em 2.5em;
+    border-radius: var(--border-radius);
+    transition: 0s all ease-in-out;
+    cursor: pointer;
+}
+  
+.skip_button {
+    color: var(--darker-grey-color);
+    border: 1px solid var(--grey-color);
+    background-color: white;
+    box-shadow: 0px 1px 0px 0px var(--grey-color);
+}
+  
+.skip_button:hover {
+    background-color: rgba(143, 157, 173, 0.2);
+}
+  
+.check_button {
+    color: white;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    box-shadow: 0px 1px 0px 0px var(--primary-darker-color);
+}
+  
+  .check_button:hover {
+    background-color: var(--primary-darker-color);
+  }
+  
+  .skip_button:active,
+  .check_button:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+
+  .crop {
+    width: 24;
+    height: 36;
+    overflow: hidden;
+    margin-right: 5px;
+  }
+
+  .crop img {
+    width: 896;
+    height: 640px;
+    margin: -12px -72px;
+    transform: scale(1.5);
+    transform-origin: top left; 
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    /* background: #1d234b; */
+  }
+  
+.image_text__container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: -10px;
+  }

@@ -1,9 +1,10 @@
 class DragDropQuiz {
-    constructor( {text, onComplete} ) {
-        this.text = text; // use this to pass in parameters instead of "Hello, my, name, is, Olivia, ."
+    constructor( {text, onComplete, imgpath} ) {
+        this.text = text;
         this.onComplete = onComplete;
         this.element = null;
         this.script = null;
+        this.imgpath = imgpath;
         const overlay = document.getElementById('overlay');
     }
 
@@ -13,43 +14,28 @@ class DragDropQuiz {
         // Create the element
         this.element = document.createElement("div");
         this.element.classList.add("DragDropQuiz");
-    
-        this.element.innerHTML = (`
-            <h2 class="quiz-title">Translate<h2>
-            <p class="quiz-instructions">Drag and drop answers in the right order. Click on an answer to reset.</p>
-            <p class="quiz-prompt"> "Hello. My name is Olivia."</p>
-    
-            
-            <div class="sentence-builder">
-                <div class="drop-zone" id="drop-zone"></div>
-            </div>
 
-            <div class="draggable-container">
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    مرحبا
-                </div>
-                <div class="draggable" id="word2" draggable="true" data-in-drop-zone="false">
-                    أنا
-                </div>
-                <div class="draggable" id="word3" draggable="true" data-in-drop-zone="false">
-                    إسم
-                </div>
-                <div class="draggable" id="word4" draggable="true" data-in-drop-zone="false">
-                    ي
-                </div>
-                <div class="draggable" id="word5" draggable="true" data-in-drop-zone="false">
-                    أوليڤيا
-                </div>
+        this.element.innerHTML = (`
+            <h2 class="quiz-title">Translate Into Arabic<h2>
+            <div class="image_text__container">
+                <div class="crop">
+                    <img id="npc" alt="npc">
+                 </div>
+                <div class="prompt" id="sentence"></div>
             </div>
-    
-    
-            <!-- Submit Button -->
-            <button class="submit-button" id="submit-btn">Submit</button>
-    
+            <br>
+            <div class="line" id="input"></div>
+            <br>
+            <div id="container"></div>    
+            <footer>
+                <div class="skip_button" >SKIP</div>
+                <button class="check_button" id="check-btn">CHECK</button>
+            </footer>
             <div id="feedback"></div>
         `);
     
-        this.addScript();
+        this.addScriptStyle();
+        this.setImg();
     
         this.element.querySelector("button").addEventListener("click", () => {
             if (this.element.querySelector("#feedback").style.color === "green") {
@@ -63,11 +49,25 @@ class DragDropQuiz {
         })
     }
 
-    addScript() {
+
+    async addScriptStyle() {
         var script = document.createElement('script');
-        script.src = './popup/quiz/DragDropQuizScript.js';
+        script.type="module";
+        script.src = './popup/quiz/script.js';
+
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = './popup/quiz/styles.css';
+
+        this.element.appendChild(link)
         this.element.appendChild(script);
     }
+
+    setImg() { // set image in quiz
+        const img = this.element.querySelector("#npc");
+        img.src = this.imgpath;
+    }
+
     done() {
         this.element.remove();
         overlay.style.display = 'none';

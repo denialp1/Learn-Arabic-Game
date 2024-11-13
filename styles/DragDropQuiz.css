@@ -21,12 +21,12 @@
     color: var(--primary-color);
 }
 
-.quiz-title {
+.title {
     font-size: 12;
     margin-bottom: -8;
 }
 
-.quiz-prompt {
+.prompt {
     font-size: 10;
 }
 
@@ -49,39 +49,17 @@
     height: 100vh;
 }
 
-.draggable-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
 .draggable {
     background-color: white;
     color: var(--accent-color);
     /* border: 1px solid #ccc; */
-    box-shadow: 1px 1px 1px gray;
+    /* box-shadow: 1px 1px 1px gray; */
     padding: 2px 2px;
     font-size: 8px;
     font-family: 'pixel', sans-serif;
     cursor: grab;
     border-radius: 3px;
     margin: 1px;
-}
-
-.draggable.dragging {
-    cursor: grabbing; /* Change the cursor to show dragging */
-    background-color: #f0f0f0; /* Change background color when dragging */
-}
-
-/* Optional: Styling for the draggable container */
-.draggable {
-    transition: all 0.3s ease;
-}
-
-.draggable[data-in-drop-zone="true"] {
-    opacity: 0.6;
-    cursor: not-allowed;
 }
 
 .sentence-builder {
@@ -121,6 +99,7 @@
 }
 
 .submit-button {
+    margin-top: 10%;
     text-decoration: none;
     font-family: 'pixel', sans-serif;
     background-color: var(--accent-color);
