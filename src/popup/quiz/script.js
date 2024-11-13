@@ -102,8 +102,9 @@ function checkAnswer() {
 // counter to next exercise
 function nextExercise() {
   setTimeout(() => {
-    if (parseInt(counter.textContent) == exercises.length-1) { // 1 before last
+    if (parseInt(counter.textContent) == exercises.length) { // 1 before last
       checkBtn.setAttribute("data-active", "false"); // use to check when to exit
+      checkBtn.click();
     }
     counter.textContent = (parseInt(counter.textContent) + 1).toString();
     setExercise(counter.textContent);

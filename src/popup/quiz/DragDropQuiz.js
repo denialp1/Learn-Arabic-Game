@@ -64,13 +64,11 @@ class DragDropQuiz {
         const checkButton = this.element.querySelector("#check-btn");
         checkButton.setAttribute("data-active", "true"); // use to check when to exit
         checkButton.addEventListener("click", () => {
-            setTimeout(() => {
-                if (checkButton.getAttribute("data-active") === "false") {
-                    // console.log("done");
-                    this.done();
-                }
-            }, 1000); // short delay to let DOM update
-        });
+             if (checkButton.getAttribute("data-active") === "false") {
+                // console.log("done");
+                this.done();
+            }
+        },); // short delay to let DOM update
     
         // renamed skip to exit, just exit
         this.element.querySelector(".skip_button").addEventListener("click", () => {
