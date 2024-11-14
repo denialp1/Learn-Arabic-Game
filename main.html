@@ -9,11 +9,39 @@
 <body>
   <div class="menu-container">
     <h1 class="menu-title">Arabic Adventure</h1>
+    <p id="username"></p>
     <div class="menu-buttons">
       <a href="screens/customize.html" class="menu-button">Start</a>
       <a href="screens/levels.html" class="menu-button">Level Select</a>
       <a href="screens/settings.html" class="menu-button">Settings</a>
+      <a href="screens/login.html" class="menu-button">Login</a>
     </div>
   </div>
 </body>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBDwqXLxFJnBbfe_UW7pKxeKq_MJ5SBHMs",
+    authDomain: "learn-arabic-4ae53.firebaseapp.com",
+    projectId: "learn-arabic-4ae53",
+    storageBucket: "learn-arabic-4ae53.firebasestorage.app",
+    messagingSenderId: "49071868729",
+    appId: "1:49071868729:web:be9f5154bac958614c76e8",
+    measurementId: "G-98YLDVND9P"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  const savedUsername = sessionStorage.getItem('username');
+  let text = document.getElementById("username");
+  if (savedUsername === null) {
+    text.innerHTML = "Not currently signed in";
+  } else {
+    text.innerHTML = "Username: " + savedUsername;
+  }
+</script>
 </html>
