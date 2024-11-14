@@ -1,73 +1,95 @@
 class DragDropQuiz {
-    constructor( {text, onComplete} ) {
-        this.text = text; // use this to pass in parameters instead of "Hello, my, name, is, Olivia, ."
+    constructor( {text, onComplete, imgpath} ) {
+        this.text = text;
         this.onComplete = onComplete;
         this.element = null;
         this.script = null;
+        this.imgpath = imgpath;
+        const overlay = document.getElementById('overlay');
     }
 
     createElement() {
+        overlay.style.display = 'block'; // dim overlay
+
         // Create the element
         this.element = document.createElement("div");
         this.element.classList.add("DragDropQuiz");
-    
+
         this.element.innerHTML = (`
-            <h2>Translate "Hello. My name is Olivia."</h2>
-            <p>Drag and drop answers into the right boxes. Click on an answer to reset.</p>
-    
-            <div class="draggable-container">
-                <div class="draggable" id="word1" draggable="true" data-in-drop-zone="false">
-                    مرحبا
-                </div>
-                <div class="draggable" id="word2" draggable="true" data-in-drop-zone="false">
-                    أنا
-                </div>
-                <div class="draggable" id="word3" draggable="true" data-in-drop-zone="false">
-                    إسم
-                </div>
-                <div class="draggable" id="word4" draggable="true" data-in-drop-zone="false">
-                    ي
-                </div>
-                <div class="draggable" id="word5" draggable="true" data-in-drop-zone="false">
-                    أوليڤيا
-                </div>
+            <h2 class="quiz-title" id="quiz-title"><h2>
+            <div class="image_text__container">
+                <div class="crop">
+                    <img id="npc" alt="npc">
+                 </div>
+                <div class="prompt" id="sentence"></div>    
+                <div id="exercise-num"></div>
             </div>
-    
-            <div class="sentence-builder">
-                <div class="drop-zone" id="drop1"></div>
-                <div class="drop-zone" id="drop2"></div>
-                <div class="drop-zone" id="drop3"></div>
-                <div class="drop-zone" id="drop4"></div>
-                <div class="drop-zone" id="drop5"></div>
-            </div>
-    
-            <!-- Submit Button -->
-            <button id="submit-btn">Submit</button>
-    
+            <br>
+            <div class="line" id="input"></div>
+            <br>
+            <div id="container"></div>    
+            <footer>
+                <div class="skip_button" >Exit</div>
+                <button class="check_button" id="check-btn">CHECK</button>
+            </footer>
             <div id="feedback"></div>
         `);
     
-        this.addScript();
-    
-        this.element.querySelector("button").addEventListener("click", () => {
-            if (this.element.querySelector("#feedback").style.color === "green") {
-                this.done();
-            }
-        })
-    
+        this.addScriptStyle();
+        this.setImg();
+        this.setButtons();
+
         this.actionListener = new KeyPressListener("Escape", () => {
             this.actionListener.unbind();
             this.done();
         })
     }
 
-    addScript() {
-        var script = document.createElement('script');
-        script.src = './popup/quiz/DragDropQuizScript.js';
+    // load scripts and links to css, need timestamps to prevent caching and load fresh
+    async addScriptStyle() {
+        const script = document.createElement('script');
+        script.type = "module";
+        script.src = `./popup/quiz/script.js?timestamp=${new Date().getTime()}`;
         this.element.appendChild(script);
+    
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = `./popup/quiz/styles.css?timestamp=${new Date().getTime()}`;
+        this.element.appendChild(link);
+    }   
+
+    // set skip, check buttons
+    setButtons() {
+        // counter
+        const counter = this.element.querySelector("#exercise-num");
+        counter.textContent = 1;
+        counter.style.display = "none";
+
+        // check button
+        const checkButton = this.element.querySelector("#check-btn");
+        checkButton.setAttribute("data-active", "true"); // use to check when to exit
+        checkButton.addEventListener("click", () => {
+             if (checkButton.getAttribute("data-active") === "false") {
+                // console.log("done");
+                this.done();
+            }
+        },); // short delay to let DOM update
+    
+        // renamed skip to exit, just exit
+        this.element.querySelector(".skip_button").addEventListener("click", () => {
+            this.done();
+        });
     }
+
+    setImg() { // set image in quiz
+        const img = this.element.querySelector("#npc");
+        img.style.display = "none";
+        img.src = this.imgpath;
+    }
+
     done() {
         this.element.remove();
+        overlay.style.display = 'none';
         this.onComplete();
     }
 

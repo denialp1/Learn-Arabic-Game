@@ -64,6 +64,7 @@ class OverworldEvent {
       }
       const quiz = new DragDropQuiz({
         text: this.event.text,
+        imgpath: this.event.imgpath,
         onComplete: () => resolve()
       })
       quiz.init( document.querySelector(".game-container") )

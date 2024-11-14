@@ -62,7 +62,7 @@ export class OverworldMap {
         const match = Object.values(this.gameObjects).find(object => {
             return utils.isTouching(player, object)
         });
-        console.log(match.quiz)
+        // console.log(match.quiz)
         if (!this.isCutscenePlaying && match && match.talking.length) {
             this.startCutscene(match.talking[0].events);
         }
@@ -145,7 +145,9 @@ window.OverworldMaps = {
                 quiz: [
                     {
                         events: [
-                            {type: "dragDropQuiz", text: "title"},
+                            {type: "dragDropQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/clerk.png",},
                         ]
                     }
                 ]
@@ -175,8 +177,8 @@ window.OverworldMaps = {
             }),
             player: new Person({
                 isPlayerControlled: true,
-                x: utils.withGrid(10),
-                y: utils.withGrid(10),
+                x: utils.withGrid(9),
+                y: utils.withGrid(14),
             }),
         },
         walls: {}
@@ -190,6 +192,6 @@ fetch('./data/walls/StarterRoomWalls.json')
             const [x, y] = coord.split(',').map(Number);
             window.OverworldMaps.DemoRoom.walls[`${x},${y}`] = true;
         }
-        console.log(window.OverworldMaps.DemoRoom)
+        // console.log(window.OverworldMaps.DemoRoom)
     })
     .catch(error => console.error('Error loading walls:', error));
