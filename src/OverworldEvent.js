@@ -69,6 +69,19 @@ class OverworldEvent {
       })
       quiz.init( document.querySelector(".game-container") )
     }
+
+    multipleChoiceQuiz(resolve) {
+      if (this.event.facePlayer) {
+        const obj = this.map.gameObjects[this.event.facePlayer];
+        obj.direction = utils.towardsPlayer(this.map.gameObjects.player, obj)
+      }
+      const quiz = new MultipleChoiceQuiz({
+        text: this.event.text,
+        imgpath: this.event.imgpath,
+        onComplete: () => resolve()
+      })
+      quiz.init( document.querySelector(".game-container") )
+    }
   
     init() {
       return new Promise(resolve => {

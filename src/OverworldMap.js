@@ -152,6 +152,25 @@ window.OverworldMaps = {
                     }
                 ]
             }),
+            clerk2: new Person({
+                x: utils.withGrid(16),
+                y: utils.withGrid(14),
+                range: 32,
+                src: "../assets/characters/clerk.png",
+                behaviorLoop: [
+                    { type: "stand",  direction: "left",},
+                ],
+                talking: [],
+                quiz: [
+                    {
+                        events: [
+                            {type: "multipleChoiceQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/clerk.png",},
+                        ]
+                    }
+                ]
+            }),
             kareem: new Person({
                 x: utils.withGrid(16),
                 y: utils.withGrid(6),

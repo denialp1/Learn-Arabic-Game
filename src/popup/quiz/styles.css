@@ -48,6 +48,21 @@ body {
     color: var(black);
 }
 
+.MultipleChoiceQuiz {
+    position: absolute;
+    left: 5;
+    right: 5;
+    bottom: 10;
+    top: 5;
+    height: 94%;
+    font-size: var(--font-norm);
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+    font-family: 'FeatherBold', sans-serif;
+    color: var(black);
+}
+
 .title {
     font-size: 12;
     margin-bottom: -8;
@@ -100,6 +115,15 @@ body {
     font-size: var(--font-norm);
     font-weight: 100;
 }
+
+.multiple_choice {
+    position: relative;
+    padding: 0 0;
+    margin-top: 12px;
+    height: 25%;
+    width: 18%;
+    word-spacing: 1000px; /* force 1 word per line */
+}
   
 .word__container {
     margin: 0 0.2em;
@@ -112,8 +136,15 @@ body {
 }
   
 .word:active {
+    border-color: #70C6EE;
+    background: #C7E5F3;
     transform: translateY(2px);
     box-shadow: none;
+}
+
+.active {
+    border-color: #70C6EE;
+    background: #C7E5F3;
 }
 
 .TextMessage_button {
@@ -203,8 +234,7 @@ footer {
     margin: -12px -72px;
     transform: scale(1.5);
     transform-origin: top left; 
-    image-rendering: crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
     /* background: #1d234b; */
   }
   

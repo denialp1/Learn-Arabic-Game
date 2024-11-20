@@ -1,7 +1,7 @@
-class DragDropQuiz {
+class MultipleChoiceQuiz {
     constructor( {text, onComplete, imgpath} ) {
         this.text = text;
-        this.type = "dragDropQuiz";
+        this.type = "multipleChoiceQuiz";
         this.onComplete = onComplete;
         this.element = null;
         this.script = null;
@@ -14,7 +14,7 @@ class DragDropQuiz {
 
         // Create the element
         this.element = document.createElement("div");
-        this.element.classList.add("DragDropQuiz");
+        this.element.classList.add("MultipleChoiceQuiz");
 
         this.element.innerHTML = (`
             <div class="type" id="${this.type}">
@@ -27,8 +27,6 @@ class DragDropQuiz {
                     <div id="exercise-num"></div>
                 </div>
                 <br>
-                <div class="line" id="input"></div>
-                <br>
                 <div id="container"></div>    
                 <footer>
                     <div class="skip_button" >Exit</div>
@@ -36,6 +34,7 @@ class DragDropQuiz {
                 </footer>
                 <div id="feedback"></div>
             </div>
+        
         `);
     
         this.addScriptStyle();
@@ -52,7 +51,7 @@ class DragDropQuiz {
     async addScriptStyle() {
         const script = document.createElement('script');
         script.type = "module";
-        script.src = `./popup/quiz/DragDropScript.js?timestamp=${new Date().getTime()}`;
+        script.src = `./popup/quiz/MultipleChoiceScript.js?timestamp=${new Date().getTime()}`;
         this.element.appendChild(script);
     
         const link = document.createElement('link');
