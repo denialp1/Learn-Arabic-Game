@@ -1,5 +1,5 @@
 class TypeQuiz {
-    constructor( {text, onComplete, imgpath} ) {
+    constructor( {text, onComplete, imgpath, audio} ) {
         this.text = text;
         this.type = "typeQuiz";
         this.onComplete = onComplete;
@@ -17,13 +17,16 @@ class TypeQuiz {
         this.element.classList.add("quiz");
 
         this.element.innerHTML = (`
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
             <div class="quizbox" id="${this.type}">
                 <h2 class="quiz-title" id="quiz-title"><h2>
                 <div class="image_text__container">
                     <div class="crop">
                         <img id="npc" alt="npc">
                     </div>
-                    <div class="prompt" id="sentence"></div>    
+                    <div class="audio_btn" id="prompt"></div>   
+                    <i id="volume-icon" class="fas fa-volume-up"></i>  
+                    <audio class="audio" id="audio" controls></audio>
                     <div id="exercise-num"></div>
                 </div>
                 <br>
@@ -62,6 +65,16 @@ class TypeQuiz {
 
     // set skip, check buttons
     setButtons() {
+        // audio
+        const promptButton = this.element.querySelector("#prompt");
+        promptButton.addEventListener("click", () => {
+            var audio = document.getElementById("audio");
+            if (document.getElementById("audio")) {
+                audio.currentTime = 0; // reset time
+                audio.play(); // play the audio when the prompt is clicked
+            }
+        });
+
         // counter
         const counter = this.element.querySelector("#exercise-num");
         counter.textContent = 1;
@@ -79,6 +92,11 @@ class TypeQuiz {
     
         // renamed skip to exit, just exit
         this.element.querySelector(".skip_button").addEventListener("click", () => {
+            var audio = document.getElementById("audio");
+            if (audio) { // if audio exist
+                audio.pause();   // pause the audio
+                audio.currentTime = 0;  // reset to the start of the audio
+            }
             this.done();
         });
     }

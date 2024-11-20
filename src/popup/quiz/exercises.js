@@ -35,9 +35,11 @@ export const multipleChoiceExercises = [
 
 export const typeExercises = [
   {
-    title: "Type the Phone Number after playing the Audio",
+    title: "Type the Phone Number after listening the Audio",
+    prompt: "Play Audio",
     placeholder: "+(xxx) x-xxxxxx",
     english: "+961 1-492759",
     arabic: "+۹۶۱ ۱۴۹۲۵۹",
+    audio: "/audio/exercises/Scene5.2.mp3",
   },
 ]

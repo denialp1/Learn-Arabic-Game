@@ -9,6 +9,24 @@ export class Overworld {
         this.canvas = config.element.querySelector(".game-canvas");
         this.ctx = this.canvas.getContext("2d");
         this.map = null;
+
+        this.backgroundAudio = new Audio('../audio/game/sample.mp3');
+        this.backgroundAudio.loop = true;
+        this.backgroundAudio.volume = 0.002;
+    }
+
+    playBackgroundMusic() {
+        this.backgroundAudio.play().catch(error => {
+            console.error("Error playing background music:", error);
+        });
+    }
+    
+    checkAudio() {
+        const shouldMute = this.map.isQuiz;
+        if (shouldMute !== this.audioMuted) {
+            this.audioMuted = shouldMute;
+            this.backgroundAudio.muted = shouldMute;
+        }
     }
 
     startGameLoop() {
@@ -42,7 +60,13 @@ export class Overworld {
             this.map.drawUpperImage(this.ctx, cameraPerson);
 
             checkInteract(this.map.gameObjects,this.map.gameObjects.player)
+            this.checkAudio();
         }
+        const startAudioOnKeyPress = () => {
+            this.playBackgroundMusic();
+            document.removeEventListener("keydown", startAudioOnKeyPress); // remove listener after first key press
+        };
+        document.addEventListener("keydown", startAudioOnKeyPress);
         window.setInterval(step, 10);
     }
 
@@ -54,6 +78,7 @@ export class Overworld {
     }
 
     init() {
+
         const level = localStorage.getItem('level');
         this.map = new OverworldMap(window.OverworldMaps[level]);
         this.map.mountObjects();

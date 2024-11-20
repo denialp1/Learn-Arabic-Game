@@ -50,7 +50,7 @@ function setItems() {
 // set blank inputs
 function setInputs() {
   var inputElement = "";
-  for (var i = answer.length - 1; i >= 0; i--) {
+  for (var i = choices.length - 1; i >= 0; i--) {
     inputElement += `<div onclick='inputClick(this.id);' style='display: inline' id=input${i} dir="rtl"> </div>`;
   }
   input.innerHTML = inputElement; // set the input fields
