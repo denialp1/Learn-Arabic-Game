@@ -1,7 +1,7 @@
-class MultipleChoiceQuiz {
+class TypeQuiz {
     constructor( {text, onComplete, imgpath} ) {
         this.text = text;
-        this.type = "multipleChoiceQuiz";
+        this.type = "typeQuiz";
         this.onComplete = onComplete;
         this.element = null;
         this.script = null;
@@ -17,7 +17,7 @@ class MultipleChoiceQuiz {
         this.element.classList.add("quiz");
 
         this.element.innerHTML = (`
-            <div class="type" id="${this.type}">
+            <div class="quizbox" id="${this.type}">
                 <h2 class="quiz-title" id="quiz-title"><h2>
                 <div class="image_text__container">
                     <div class="crop">
@@ -51,7 +51,7 @@ class MultipleChoiceQuiz {
     async addScriptStyle() {
         const script = document.createElement('script');
         script.type = "module";
-        script.src = `./popup/quiz/MultipleChoiceScript.js?timestamp=${new Date().getTime()}`;
+        script.src = `./popup/quiz/TypeQuizScript.js?timestamp=${new Date().getTime()}`;
         this.element.appendChild(script);
     
         const link = document.createElement('link');

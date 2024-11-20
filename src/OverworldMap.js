@@ -206,8 +206,12 @@ window.OverworldMaps = {
                              range: "1,3",},
                             {type: "multipleChoiceQuiz",
                              text: "title",
-                             imgpath: "../assets/characters/clerk.png",
+                             imgpath: "../assets/characters/kareem.png",
                              range: "1,2",},
+                             {type: "typeQuiz",
+                              text: "title",
+                              imgpath: "../assets/characters/kareem.png",
+                              range: "1,1",},
                         ]
                     }
                 ]

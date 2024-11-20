@@ -32,3 +32,12 @@ export const multipleChoiceExercises = [
     list: ["Gulf (خليجي)", "Levantine (شامي)", "Moroccan (مغربي/دريجة)", "Egyptian (مصري)"],
   },
 ]
+
+export const typeExercises = [
+  {
+    title: "Type the Phone Number after playing the Audio",
+    placeholder: "+(xxx) x-xxxxxx",
+    english: "+961 1-492759",
+    arabic: "+۹۶۱ ۱۴۹۲۵۹",
+  },
+]

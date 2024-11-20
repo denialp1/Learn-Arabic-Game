@@ -6,7 +6,9 @@ export async function cutscene2(map) { // NOTE* script halts  if any movements a
         { who: "player", type: "walk", direction: "down" },
         { who: "kareem", type: "walk", direction: "left" },
     ]);
-    setQuiz(map, "kareem", "1,3", "dragDropQuiz");
+    // setQuiz(map, "kareem", "1,3", "dragDropQuiz");
+    
+    setQuiz(map, "kareem", "1,1", "typeQuiz");
     await waitQuiz(map);
     await moveTo("kareem", map, 3, 3);
     await map.startCutscene([
