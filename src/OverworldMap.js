@@ -10,6 +10,7 @@ export class OverworldMap {
         this.upperImage.src = config.upperSrc; // objects over the player's head
 
         this.isCutscenePlaying = false;
+        this.isQuiz = false;
     }
 
     drawLowerImage(ctx, cameraPerson) {
@@ -40,18 +41,24 @@ export class OverworldMap {
         })
     }
 
-    async startCutscene(events) {
+    async startCutscene(events, activeType = null) {
         this.isCutscenePlaying = true;
+        if (activeType != null) {  
+            this.isQuiz = true;
+        }
     
         for (let event of events) {
-            const eventHandler = new OverworldEvent({
-                event,
-                map: this,
-            });
-            await eventHandler.init(); // Waits for this event to finish before continuing
+            if (!activeType || event.type == activeType) {
+                const eventHandler = new OverworldEvent({
+                    event,
+                    map: this,
+                });
+                await eventHandler.init(); // Waits for this event to finish before continuing
+            }
         }
     
         this.isCutscenePlaying = false;
+        this.isQuiz = false;
     
         // Reset NPCs to do idle behavior
         Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this));
@@ -69,7 +76,8 @@ export class OverworldMap {
             await this.startCutscene(match.talking[0].events);
         }
         if (!this.isCutscenePlaying && match && match.quiz.length) {
-            await this.startCutscene(match.quiz[0].events);
+            // console.log("check", match.quiz[0].active);
+            await this.startCutscene(match.quiz[0].events, match.quiz[0].active);
         }
         // console.log("resolve check");
     }
@@ -155,6 +163,25 @@ window.OverworldMaps = {
                     }
                 ]
             }),
+            clerk2: new Person({
+                x: utils.withGrid(16),
+                y: utils.withGrid(14),
+                range: 32,
+                src: "../assets/characters/clerk.png",
+                behaviorLoop: [
+                    { type: "stand",  direction: "left",},
+                ],
+                talking: [],
+                quiz: [
+                    {
+                        events: [
+                            {type: "multipleChoiceQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/clerk.png",},
+                        ]
+                    }
+                ]
+            }),
             kareem: new Person({
                 x: utils.withGrid(11),
                 y: utils.withGrid(4),
@@ -171,11 +198,16 @@ window.OverworldMaps = {
                 talking: [],
                 quiz: [
                     {
+                        active: "dragDropQuiz", // active quizzes
                         events: [
                             {type: "dragDropQuiz",
                              text: "title",
                              imgpath: "../assets/characters/kareem.png",
-                             range: "1,1",},
+                             range: "1,3",},
+                            {type: "multipleChoiceQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/clerk.png",
+                             range: "1,2",},
                         ]
                     }
                 ]

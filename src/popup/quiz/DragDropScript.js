@@ -1,7 +1,8 @@
-import { exercises } from "./exercises.js";
+import { dragDropExercises } from "./exercises.js";
 
 // set sentence to exercise
 const title = document.getElementById("quiz-title");
+const type = document.getElementsByClassName("type");
 const sentence = document.getElementById("sentence");
 const container = document.getElementById("container");
 const input = document.getElementById("input");
@@ -10,6 +11,8 @@ const img = document.getElementById("npc");
 const checkBtn = document.getElementById("check-btn");
 const counter = document.getElementById("exercise-num");
 const max = parseInt(document.getElementById("exercise-limit").textContent);
+
+var exercises = dragDropExercises;
 var exercise = null;
 var answer = null;
 var picked = 0;
@@ -19,10 +22,14 @@ setExercise(parseInt(counter.textContent));
 
 // set fields
 function setExercise(count) {
+  // type[0].id = type of quiz, passed in line 20 DragDropQuiz/MultipleChoiceQuiz.js
+  
   // console.log("setting", count);
   if (count >= 1 && count <= exercises.length) {
     exercise = exercises[count-1];
+    // console.log(exercise);
     answer = exercise.arabic.trim().split(/\s+/); 
+    // console.log(answer);
     picked = 0; // track num inputs
     setItems();
     setInputs();

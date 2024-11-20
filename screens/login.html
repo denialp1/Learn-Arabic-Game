@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="./css/main.css"/>
+    </head>
+    <body>
+        <div class="form-container">
+            <h1 class="login-title">LOGIN</h1>
+                <div class="toggle-buttons"></div>
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="button-group">
+                    <button type="button" id="login">Login</button>
+                <span style="float: right;">New user? <a href="./signup.html">Sign up</a></span>
+                </div>
+            <div class="menu-buttons">
+                <a href="../main.html" class="back-button">BACK</a>
+            </div>
+        </div>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+            const firebaseConfig = {
+              apiKey: "AIzaSyBDwqXLxFJnBbfe_UW7pKxeKq_MJ5SBHMs",
+              authDomain: "learn-arabic-4ae53.firebaseapp.com",
+              projectId: "learn-arabic-4ae53",
+              storageBucket: "learn-arabic-4ae53.firebasestorage.app",
+              messagingSenderId: "49071868729",
+              appId: "1:49071868729:web:be9f5154bac958614c76e8",
+              measurementId: "G-98YLDVND9P"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+            import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+            import { getDatabase, ref, child, get, set, update, remove } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+            const db = getDatabase();
+            const auth = getAuth();
+
+            let username = document.getElementById("username");
+            let password = document.getElementById("password");
+
+            let loginButton = document.getElementById("login");
+
+            loginButton.addEventListener("click", () => {
+                signInWithEmailAndPassword(auth, username.value + "@learnarabic.com", password.value)
+                    .then((userCredential) => {
+                        // Signed in 
+                        const user = userCredential.user;
+                        alert("Login successful");
+                        // Redirect or perform other actions
+                        sessionStorage.setItem('username', username.value);
+                        window.location.href = "../main.html";
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        alert("Login failed: " + errorMessage);
+                    });
+            });
+
+            function addData() {
+                set(ref(db, 'users/' + username.value), {
+                    username: username.value,
+                    password: password.value
+                }).then(() => {
+                    alert("Data added successfully");
+                }).catch(() => {
+                    alert("Unsuccessful");
+                    console.log(error);
+                })
+            }
+            
+            function getData() {
+                const dbRef = ref(db);
+                get(child(dbRef, 'users/' + username.value)).then((snapshop) => {
+                    if (snapshot.exists) {
+                        username.value = snapshot.val().username;
+                        password.value = snapshot.val().password;
+                    }
+                    else {
+                        alert("user does not exist");
+                    }
+                }).catch((error) => {
+                    alert("unsuccessful");
+                    console.log(error);
+                }) 
+            }
+
+            function updateData() {
+                update(ref(db, 'users/' + username.value), {
+                    username: username.value,
+                    password: password.value
+                }).then(() => {
+                    alert("Data added successfully");
+                }).catch(() => {
+                    alert("Unsuccessful");
+                    console.log(error);
+                })
+            }
+
+            function removeData() {
+                remove(ref(db, 'users/' + username.value)).then(() => {
+                    alert("Data added successfully");
+                }).catch(() => {
+                    alert("Unsuccessful");
+                    console.log(error);
+                })
+            }
+
+            function test() {
+                console.log("test");
+            }
+
+            loginButton.addEventListener("click", test);
+          </script>
+    </body>
+    
+
+    
+</html>

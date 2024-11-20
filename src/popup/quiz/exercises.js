@@ -1,4 +1,4 @@
-export const exercises = [
+export const dragDropExercises = [
   {
     title: "Translate Into Arabic",
     english: "Hello. My name is Olivia.",
@@ -17,3 +17,18 @@ export const exercises = [
   },
   
 ];
+
+export const multipleChoiceExercises = [
+  {
+    title: "Choose the right option for the word 'Key' in Arabic",
+    english: "Key",
+    arabic: "مفتاح",
+    list: ["مصطفی", "مفتاح", "مفتوح", "فتحة", "تفاحة"],
+  },
+  {
+    title: "Identify the dialect in the Sound Clip",
+    english: "[Sound Clip]",
+    arabic: "Levantine (شامي)",
+    list: ["Gulf (خليجي)", "Levantine (شامي)", "Moroccan (مغربي/دريجة)", "Egyptian (مصري)"],
+  },
+]
