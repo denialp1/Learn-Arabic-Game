@@ -79,9 +79,13 @@ function setInputArea() {
 
 // check answer function
 function checkAnswer() {
+  if (document.getElementById("user-input") == null) {
+    return;
+  }
   const userInput = document.getElementById("user-input").value.trim();
   if (userInput) {
     console.log(userInput);
+    console.log(answer);
     if (userInput === answer) {
       feedback.textContent = "Good Job! 🎉";
       feedback.style.color = "green";
