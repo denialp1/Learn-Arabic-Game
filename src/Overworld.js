@@ -45,6 +45,7 @@ export class Overworld {
         window.setInterval(step, 10);
     }
 
+
     bindActionInput() {
         new KeyPressListener("KeyE", () => {
             // Is there person here to start dialogue?
@@ -68,9 +69,71 @@ export class Overworld {
             cutscene1(this.map);
         }
         if (level == "grocery") {
+            cutscene2(this.map);
             this.map.walls = groceryWalls;;
         }
     }
+}
+
+async function cutscene2(map) { // NOTE* script halts  if any movements are invalid (e.g. move up against solid wall)
+    await map.startCutscene([
+        { who: "player", type: "walk", direction: "down" },
+        { who: "kareem", type: "walk", direction: "left" },
+    ]);
+    await map.checkForActionCutscene();
+    await map.startCutscene([
+        { who: "player", type: "walk", direction: "left" },
+        { who: "player", type: "walk", direction: "left" },
+        { who: "player", type: "walk", direction: "left" },
+        { who: "player", type: "walk", direction: "left" },
+        { who: "player", type: "walk", direction: "left" },
+        { who: "player", type: "walk", direction: "up" },
+        { who: "kareem", type: "walk", direction: "left" },
+        { who: "kareem", type: "walk", direction: "up" },
+        { who: "kareem", type: "walk", direction: "left" },
+        { who: "kareem", type: "walk", direction: "left" },
+        { who: "kareem", type: "walk", direction: "left" },
+        { who: "kareem", type: "walk", direction: "left" },
+        { who: "kareem", type: "stand", direction: "left" },
+    ]);
+    setQuiz(map, "kareem", "2,2"); // go to next question
+    await map.checkForActionCutscene();
+    await map.startCutscene([
+        { who: "player", type: "walk", direction: "left" },
+        { who: "player", type: "walk", direction: "left" },
+        { who: "player", type: "walk", direction: "down" },
+        { who: "player", type: "walk", direction: "down" },
+        { who: "player", type: "walk", direction: "down" },
+        { who: "player", type: "walk", direction: "down" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "right" },
+        { who: "player", type: "walk", direction: "up" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "down" },
+        { who: "kareem", type: "walk", direction: "down" },
+        { who: "kareem", type: "walk", direction: "down" },
+        { who: "kareem", type: "walk", direction: "down" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "right" },
+        { who: "kareem", type: "walk", direction: "up" },
+    ]);
+    setQuiz(map, "kareem", "3,3"); // go to next question
+    await map.checkForActionCutscene();
 }
 
 function cutscene1(map) {
@@ -83,4 +146,9 @@ function cutscene1(map) {
         { who: "npc1", type: "walk", direction: "left" },
         { who: "npc1", type: "stand", direction: "up", time: 800 },
     ])
+}
+
+function setQuiz(map, npc, range) {
+    console.log(map.gameObjects[npc].quiz);
+    map.gameObjects[npc].quiz[0].events[0].range = range;
 }

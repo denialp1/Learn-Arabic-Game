@@ -1,10 +1,11 @@
 class DragDropQuiz {
-    constructor( {text, onComplete, imgpath} ) {
+    constructor( {text, onComplete, imgpath, range} ) {
         this.text = text;
         this.onComplete = onComplete;
         this.element = null;
         this.script = null;
         this.imgpath = imgpath;
+        this.range = range;
         const overlay = document.getElementById('overlay');
     }
 
@@ -23,6 +24,7 @@ class DragDropQuiz {
                  </div>
                 <div class="prompt" id="sentence"></div>    
                 <div id="exercise-num"></div>
+                <div id="exercise-limit"></div>
             </div>
             <br>
             <div class="line" id="input"></div>
@@ -38,6 +40,7 @@ class DragDropQuiz {
         this.addScriptStyle();
         this.setImg();
         this.setButtons();
+        this.setQuestion(this.range); // default start at 1
 
         this.actionListener = new KeyPressListener("Escape", () => {
             this.actionListener.unbind();
@@ -60,11 +63,6 @@ class DragDropQuiz {
 
     // set skip, check buttons
     setButtons() {
-        // counter
-        const counter = this.element.querySelector("#exercise-num");
-        counter.textContent = 1;
-        counter.style.display = "none";
-
         // check button
         const checkButton = this.element.querySelector("#check-btn");
         checkButton.setAttribute("data-active", "true"); // use to check when to exit
@@ -79,6 +77,18 @@ class DragDropQuiz {
         this.element.querySelector(".skip_button").addEventListener("click", () => {
             this.done();
         });
+    }
+
+    setQuestion(range) {
+        // parse string
+        const [lower, upper] = range.split(",").map(Number);
+        // counter
+        const start = this.element.querySelector("#exercise-num");
+        // start.style.display = "none";
+        start.textContent = lower;
+        const limit = this.element.querySelector("#exercise-limit");
+        limit.style.display = "none";
+        limit.textContent = upper;
     }
 
     setImg() { // set image in quiz

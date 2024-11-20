@@ -42,33 +42,36 @@ export class OverworldMap {
 
     async startCutscene(events) {
         this.isCutscenePlaying = true;
-
-        for (let i = 0; i < events.length; i++) {
+    
+        for (let event of events) {
             const eventHandler = new OverworldEvent({
-                event: events[i],
+                event,
                 map: this,
-            })
-            await eventHandler.init();
+            });
+            await eventHandler.init(); // Waits for this event to finish before continuing
         }
-
+    
         this.isCutscenePlaying = false;
-
+    
         // Reset NPCs to do idle behavior
-        Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
+        Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this));
+        // console.log("resolve cutscene");
     }
+    
 
-    checkForActionCutscene() {
+    async checkForActionCutscene() {
         const player = this.gameObjects["player"];
         const match = Object.values(this.gameObjects).find(object => {
             return utils.isTouching(player, object)
         });
         // console.log(match.quiz)
         if (!this.isCutscenePlaying && match && match.talking.length) {
-            this.startCutscene(match.talking[0].events);
+            await this.startCutscene(match.talking[0].events);
         }
         if (!this.isCutscenePlaying && match && match.quiz.length) {
-            this.startCutscene(match.quiz[0].events);
+            await this.startCutscene(match.quiz[0].events);
         }
+        // console.log("resolve check");
     }
 
     addWall(x, y) {
@@ -153,32 +156,34 @@ window.OverworldMaps = {
                 ]
             }),
             kareem: new Person({
-                x: utils.withGrid(16),
-                y: utils.withGrid(6),
+                x: utils.withGrid(11),
+                y: utils.withGrid(4),
                 range: 16,
                 src: "../assets/characters/kareem.png",
-                behaviorLoop: [
-                    { type: "walk",  direction: "left" },
-                    { type: "walk",  direction: "left" },
-                    { type: "stand",  direction: "up", time: 1000 },
-                    { type: "walk",  direction: "right" },
-                    { type: "walk",  direction: "right" },
-                    { type: "stand",  direction: "up", time: 1000 },
-                ],
-                talking: [
+                // behaviorLoop: [
+                //     { type: "walk",  direction: "left" },
+                //     { type: "walk",  direction: "left" },
+                //     { type: "stand",  direction: "up", time: 1000 },
+                //     { type: "walk",  direction: "right" },
+                //     { type: "walk",  direction: "right" },
+                //     { type: "stand",  direction: "up", time: 1000 },
+                // ],
+                talking: [],
+                quiz: [
                     {
                         events: [
-                            {type: "textMessage", text: "I'm busy...", facePlayer: "kareem"},
-                            {type: "textMessage", text: "Go away."},
+                            {type: "dragDropQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/kareem.png",
+                             range: "1,1",},
                         ]
                     }
-                ],
-                quiz : [ {} ]
+                ]
             }),
             player: new Person({
                 isPlayerControlled: true,
                 x: utils.withGrid(9),
-                y: utils.withGrid(14),
+                y: utils.withGrid(3),
             }),
         },
         walls: {}
