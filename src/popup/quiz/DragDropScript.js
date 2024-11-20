@@ -15,6 +15,7 @@ const max = parseInt(document.getElementById("exercise-limit").textContent);
 var exercises = dragDropExercises;
 var exercise = null;
 var answer = null;
+var choices = null;
 var picked = 0;
 
 // set
@@ -29,6 +30,7 @@ function setExercise(count) {
     exercise = exercises[count-1];
     // console.log(exercise);
     answer = exercise.arabic.trim().split(/\s+/); 
+    choices = exercise.list;
     // console.log(answer);
     picked = 0; // track num inputs
     setItems();
@@ -53,10 +55,19 @@ function setInputs() {
   }
   input.innerHTML = inputElement; // set the input fields
   var htmlElements = "";
-  for (var i = 0; i < answer.length; i++) { // set answer input buttons
-    htmlElements += "<button class='word' onclick='btnClick(this.id);' id = 'btn" + i + "'>" + answer[i] + '</button>';
+  shuffleArray(choices); // shuffle answers
+  for (var i = 0; i < choices.length; i++) { // set answer input buttons
+    htmlElements += "<button class='word' onclick='btnClick(this.id);' id = 'btn" + i + "'>" + choices[i] + '</button>';
   }
   container.innerHTML = htmlElements;
+}
+
+// shuffle array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // swap elements
+  }
 }
 
 // clicking on line inputs

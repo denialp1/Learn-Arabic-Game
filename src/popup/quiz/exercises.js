@@ -3,17 +3,17 @@ export const dragDropExercises = [
     title: "Translate Into Arabic",
     english: "Hello. My name is Olivia.",
     arabic: "أوليڤيا أنا إسم ي مرحبا",
-    list: ["مرحبا", "ي", "إسم", "أنا", "أوليڤيا"],
+    list: ["مرحبا", "ي", "إسم", "أنا", "أوليڤيا", "من", "ألاقي"],
   },{
     title: "Translate Into Arabic",
     english: "I am from Boston, USA.",
     arabic: "أنا من بوسطن، أمريکا",
-    list: ["أمريکا", "بوسطن،", "من", "أنا"],
+    list: ["أمريکا", "بوسطن،", "من", "أنا", "إسم", "أوليڤيا"],
   },{
     title: "Translate Into Arabic",
     english: "Can you help me find these ingredients?",
     arabic: "ممکن تساعدنی ألاقي ھالمکوّنات؟",
-    list: ["ھالمکوّنات؟", "ألاقي", "تساعدنی", "ممکن"],
+    list: ["ھالمکوّنات؟", "ألاقي", "تساعدنی", "ممکن", "مرحبا", "بوسطن،"],
   },
   
 ];
