@@ -10,6 +10,7 @@ export class OverworldMap {
         this.upperImage.src = config.upperSrc; // objects over the player's head
 
         this.isCutscenePlaying = false;
+        this.isQuiz = false;
     }
 
     drawLowerImage(ctx, cameraPerson) {
@@ -40,35 +41,45 @@ export class OverworldMap {
         })
     }
 
-    async startCutscene(events) {
+    async startCutscene(events, activeType = null) {
         this.isCutscenePlaying = true;
-
-        for (let i = 0; i < events.length; i++) {
-            const eventHandler = new OverworldEvent({
-                event: events[i],
-                map: this,
-            })
-            await eventHandler.init();
+        if (activeType != null) {  
+            this.isQuiz = true;
         }
-
+    
+        for (let event of events) {
+            if (!activeType || event.type == activeType) {
+                const eventHandler = new OverworldEvent({
+                    event,
+                    map: this,
+                });
+                await eventHandler.init(); // Waits for this event to finish before continuing
+            }
+        }
+    
         this.isCutscenePlaying = false;
-
+        this.isQuiz = false;
+    
         // Reset NPCs to do idle behavior
-        Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
+        Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this));
+        // console.log("resolve cutscene");
     }
+    
 
-    checkForActionCutscene() {
+    async checkForActionCutscene() {
         const player = this.gameObjects["player"];
         const match = Object.values(this.gameObjects).find(object => {
             return utils.isTouching(player, object)
         });
         // console.log(match.quiz)
         if (!this.isCutscenePlaying && match && match.talking.length) {
-            this.startCutscene(match.talking[0].events);
+            await this.startCutscene(match.talking[0].events);
         }
         if (!this.isCutscenePlaying && match && match.quiz.length) {
-            this.startCutscene(match.quiz[0].events);
+            // console.log("check", match.quiz[0].active);
+            await this.startCutscene(match.quiz[0].events, match.quiz[0].active);
         }
+        // console.log("resolve check");
     }
 
     addWall(x, y) {
@@ -172,32 +183,43 @@ window.OverworldMaps = {
                 ]
             }),
             kareem: new Person({
-                x: utils.withGrid(16),
-                y: utils.withGrid(6),
+                x: utils.withGrid(11),
+                y: utils.withGrid(4),
                 range: 16,
                 src: "../assets/characters/kareem.png",
-                behaviorLoop: [
-                    { type: "walk",  direction: "left" },
-                    { type: "walk",  direction: "left" },
-                    { type: "stand",  direction: "up", time: 1000 },
-                    { type: "walk",  direction: "right" },
-                    { type: "walk",  direction: "right" },
-                    { type: "stand",  direction: "up", time: 1000 },
-                ],
-                talking: [
+                // behaviorLoop: [
+                //     { type: "walk",  direction: "left" },
+                //     { type: "walk",  direction: "left" },
+                //     { type: "stand",  direction: "up", time: 1000 },
+                //     { type: "walk",  direction: "right" },
+                //     { type: "walk",  direction: "right" },
+                //     { type: "stand",  direction: "up", time: 1000 },
+                // ],
+                talking: [],
+                quiz: [
                     {
+                        active: "dragDropQuiz", // active quizzes
                         events: [
-                            {type: "textMessage", text: "I'm busy...", facePlayer: "kareem"},
-                            {type: "textMessage", text: "Go away."},
+                            {type: "dragDropQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/kareem.png",
+                             range: "1,3",},
+                            {type: "multipleChoiceQuiz",
+                             text: "title",
+                             imgpath: "../assets/characters/kareem.png",
+                             range: "1,2",},
+                             {type: "typeQuiz",
+                              text: "title",
+                              imgpath: "../assets/characters/kareem.png",
+                              range: "1,1",},
                         ]
                     }
-                ],
-                quiz : [ {} ]
+                ]
             }),
             player: new Person({
                 isPlayerControlled: true,
                 x: utils.withGrid(9),
-                y: utils.withGrid(14),
+                y: utils.withGrid(3),
             }),
         },
         walls: {}

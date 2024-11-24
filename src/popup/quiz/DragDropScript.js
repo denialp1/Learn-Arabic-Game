@@ -10,10 +10,12 @@ const feedback = document.getElementById("feedback");
 const img = document.getElementById("npc");
 const checkBtn = document.getElementById("check-btn");
 const counter = document.getElementById("exercise-num");
+const max = parseInt(document.getElementById("exercise-limit").textContent);
 
 var exercises = dragDropExercises;
 var exercise = null;
 var answer = null;
+var choices = null;
 var picked = 0;
 
 // set
@@ -26,9 +28,10 @@ function setExercise(count) {
   // console.log("setting", count);
   if (count >= 1 && count <= exercises.length) {
     exercise = exercises[count-1];
-    console.log(exercise);
+    // console.log(exercise);
     answer = exercise.arabic.trim().split(/\s+/); 
-    console.log(answer);
+    choices = exercise.list;
+    // console.log(answer);
     picked = 0; // track num inputs
     setItems();
     setInputs();
@@ -47,15 +50,24 @@ function setItems() {
 // set blank inputs
 function setInputs() {
   var inputElement = "";
-  for (var i = answer.length - 1; i >= 0; i--) {
+  for (var i = choices.length - 1; i >= 0; i--) {
     inputElement += `<div onclick='inputClick(this.id);' style='display: inline' id=input${i} dir="rtl"> </div>`;
   }
   input.innerHTML = inputElement; // set the input fields
   var htmlElements = "";
-  for (var i = 0; i < answer.length; i++) { // set answer input buttons
-    htmlElements += "<button class='word' onclick='btnClick(this.id);' id = 'btn" + i + "'>" + answer[i] + '</button>';
+  shuffleArray(choices); // shuffle answers
+  for (var i = 0; i < choices.length; i++) { // set answer input buttons
+    htmlElements += "<button class='word' onclick='btnClick(this.id);' id = 'btn" + i + "'>" + choices[i] + '</button>';
   }
   container.innerHTML = htmlElements;
+}
+
+// shuffle array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // swap elements
+  }
 }
 
 // clicking on line inputs
@@ -109,7 +121,7 @@ function checkAnswer() {
 // counter to next exercise
 function nextExercise() {
   setTimeout(() => {
-    if (parseInt(counter.textContent) == exercises.length) { // 1 before last
+    if (parseInt(counter.textContent) === max) { // 1 before last
       checkBtn.setAttribute("data-active", "false"); // use to check when to exit
       checkBtn.click();
     }
