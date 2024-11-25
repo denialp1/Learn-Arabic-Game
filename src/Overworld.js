@@ -15,9 +15,6 @@ export class Overworld {
 
             // Clear the Canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-            // Start the background music without waiting for a key press
-            this.playBackgroundMusic();
     
             // Establish Camera person
             const cameraPerson = this.map.gameObjects.player;
