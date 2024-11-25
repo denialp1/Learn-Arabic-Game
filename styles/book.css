@@ -9,7 +9,7 @@
   position: absolute; 
   bottom: -26%;
   right: -18%;
-  scale: 0.3;
+  scale: 0.4;
   /* background-color: #8A2E14; */
   transition: transform 0.3s ease;
 }
