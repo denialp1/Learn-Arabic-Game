@@ -84,7 +84,10 @@ class DragDropQuiz {
 
     setQuestion(range) {
         // parse string
-        const [lower, upper] = range.split(",").map(Number);
+        // Default values in case range is invalid or undefined
+        const [lower = 1, upper = 10] = (typeof range === 'string' && range.includes(',')) 
+        ? range.split(",").map(Number)
+        : [1, 10];
         // counter
         const start = this.element.querySelector("#exercise-num");
         // start.style.display = "none";
