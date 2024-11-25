@@ -65,7 +65,6 @@ class OverworldEvent {
       const quiz = new DragDropQuiz({
         text: this.event.text,
         imgpath: this.event.imgpath,
-        range: this.event.range,
         onComplete: () => resolve()
       })
       quiz.init( document.querySelector(".game-container") )
@@ -77,20 +76,6 @@ class OverworldEvent {
         obj.direction = utils.towardsPlayer(this.map.gameObjects.player, obj)
       }
       const quiz = new MultipleChoiceQuiz({
-        text: this.event.text,
-        imgpath: this.event.imgpath,
-        onComplete: () => resolve()
-      })
-      quiz.init( document.querySelector(".game-container") )
-    }
-
-    
-    typeQuiz(resolve) {
-      if (this.event.facePlayer) {
-        const obj = this.map.gameObjects[this.event.facePlayer];
-        obj.direction = utils.towardsPlayer(this.map.gameObjects.player, obj)
-      }
-      const quiz = new TypeQuiz({
         text: this.event.text,
         imgpath: this.event.imgpath,
         onComplete: () => resolve()
