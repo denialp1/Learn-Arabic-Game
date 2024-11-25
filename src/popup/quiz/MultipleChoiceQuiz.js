@@ -14,7 +14,7 @@ class MultipleChoiceQuiz {
 
         // Create the element
         this.element = document.createElement("div");
-        this.element.classList.add("quiz");
+        this.element.classList.add("MultipleChoiceQuiz");
 
         this.element.innerHTML = (`
             <div class="type" id="${this.type}">

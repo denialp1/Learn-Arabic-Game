@@ -1,5 +1,5 @@
 class DragDropQuiz {
-    constructor( {text, onComplete, imgpath, range} ) {
+    constructor( {text, onComplete, imgpath} ) {
         this.text = text;
         this.type = "dragDropQuiz";
         this.onComplete = onComplete;
@@ -15,7 +15,7 @@ class DragDropQuiz {
 
         // Create the element
         this.element = document.createElement("div");
-        this.element.classList.add("quiz");
+        this.element.classList.add("DragDropQuiz");
 
         this.element.innerHTML = (`
             <div class="type" id="${this.type}">
