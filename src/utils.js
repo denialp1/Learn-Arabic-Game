@@ -38,6 +38,13 @@ const utils = {
         });
         document.dispatchEvent(event);
     },
+    wait(ms) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve()
+          }, ms)
+        })
+      },
     isTouching(object1, object2) {
         const range = object2.range;
         const x = Math.abs(object1.x - object2.x) <= range
