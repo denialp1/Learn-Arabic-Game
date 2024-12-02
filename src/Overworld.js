@@ -18,7 +18,7 @@ export class Overworld {
 
     playBackgroundMusic() {
         this.backgroundAudio.play().catch(error => {
-            console.error("Error playing background music:", error);
+            // console.error("Error playing background music:", error);
         });
     }
     
@@ -37,7 +37,7 @@ export class Overworld {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
             // Start the background music without waiting for a key press
-            this.playBackgroundMusic();
+            this.playBackgroundMusic(); // disabled, should be deprecated?
             
             // Establish Camera person
             const cameraPerson = this.map.gameObjects.player;
