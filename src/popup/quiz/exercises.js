@@ -27,9 +27,10 @@ export const multipleChoiceExercises = [
   },
   {
     title: "Identify the dialect in the Sound Clip",
-    english: "[Sound Clip]",
+    prompt: "Play Audio",
     arabic: "Levantine (شامي)",
     list: ["Gulf (خليجي)", "Levantine (شامي)", "Moroccan (مغربي/دريجة)", "Egyptian (مصري)"],
+    audio: "/audio/exercises/Scene5.1.mp3",
   },
 ]
 

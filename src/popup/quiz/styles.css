@@ -298,4 +298,19 @@ footer {
     align-items: center;
     margin-left: 10px;
     margin-bottom: -10px;
-  }
+}
+
+#feedback {
+    position: fixed;
+    top: 26%;
+    left: 70%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px;
+    z-index: 9999;
+    display: none;
+    image-rendering: smooth;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

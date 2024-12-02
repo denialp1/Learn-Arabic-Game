@@ -1,4 +1,4 @@
-import { typeExercises } from "./exercises.js";  // Keep this import since you're using it to load the exercises.
+import { typeExercises } from "./exercises.js"; 
 
 // set sentence to exercise
 const title = document.getElementById("quiz-title");
@@ -89,6 +89,7 @@ function checkAnswer() {
     if (userInput === answer) {
       feedback.textContent = "Good Job! 🎉";
       feedback.style.color = "green";
+      feedback.style.display = "block"; 
       nextExercise();
     } else {
       feedback.textContent = "Try Again! 😅";
