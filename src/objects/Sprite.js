@@ -40,16 +40,18 @@ class Sprite {
 
         this.gameObject = config.gameObject;
 
-        this.thinking = false; // initially no emote
-        this.thinkingImg = new Image();
-        this.thinkingImg.src = "../../assets/interact/thinking.png";
-        this.thinkingAnimations = {
+        this.bubble = false; // false default
+        this.bubbleId = null; // bubble animation id
+        this.bubbleImg = new Image();
+        this.bubbleImg.src = "../../assets/interact/bubble.png";
+        this.bubbleAnimations = {
             "base": [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]],
-            "thinking": [[16, 16], [16, 16], [2, 0], [3, 0,], [2, 9], [3, 9]],
+            "waiting": [[16, 16], [16, 16], [2, 0], [3, 0,], [2, 9], [3, 9]],
+            "thinking": [[16, 16], [16, 16], [2, 0], [3, 0,], [2, 6], [3, 6]],
         };
-        this.thinkingFrameLimit = config.thinkingFrameLimit || 10; // separate speed
-        this.thinkingFrameProgress = this.thinkingFrameLimit;
-        this.currentThinkingFrame = 0;
+        this.bubbleFrameLimit = config.bubbleFrameLimit || 10; // separate speed
+        this.bubbleFrameProgress = this.bubbleFrameLimit;
+        this.currentbubbleFrame = 0;
     }
 
     get frame() {
@@ -83,20 +85,16 @@ class Sprite {
         }
     }
 
-    updateThinkingAnimationProgress() {
-        // Downtick frame progress for thinking animation
-        if (this.thinkingFrameProgress > 0) {
-            this.thinkingFrameProgress -= 1;
+    updatebubbleAnimationProgress() {
+        // Downtick frame progress for bubble animation
+        if (this.bubbleFrameProgress > 0) {
+            this.bubbleFrameProgress -= 1;
             return;
         }
 
-        // Reset the counter for thinking animation
-        this.thinkingFrameProgress = this.thinkingFrameLimit;
-        this.currentThinkingFrame += 1;
-
-        if (this.thinkingAnimations["thinking"][this.currentThinkingFrame] === undefined) {
-            this.currentThinkingFrame = 0;
-        }
+        // Reset the counter for bubble animation
+        this.bubbleFrameProgress = this.bubbleFrameLimit;
+        this.currentbubbleFrame += 1;
     }
 
     draw(ctx, cameraPerson) {
@@ -115,21 +113,19 @@ class Sprite {
             16, 32
         );
 
-        this.showThinkingPopup(ctx, cameraPerson);
         this.updateAnimationProgress();
-        this.updateThinkingAnimationProgress();
     }
 
-    showThinkingPopup(ctx, cameraPerson) {
-        if (this.thinking) {
+    drawBubble(ctx, cameraPerson) {
+        if (this.bubble) {
             const x = this.gameObject.x + utils.withGrid(10.5) - cameraPerson.x;
             const y = this.gameObject.y - 16 + utils.withGrid(6) - cameraPerson.y;
             const offsetX = 7;
 
             // top adjustable
-            var [frameX, frameY] = this.thinkingAnimations["thinking"][this.currentThinkingFrame % this.thinkingAnimations["thinking"].length];
+            var [frameX, frameY] = this.bubbleAnimations[this.bubbleId][this.currentbubbleFrame % this.bubbleAnimations[this.bubbleId].length];
             ctx.drawImage(
-                this.thinkingImg,
+                this.bubbleImg,
                 frameX * 16, frameY * 16,
                 16, 16, // frame size
                 x + offsetX, y - 16,
@@ -137,14 +133,15 @@ class Sprite {
             );
 
             // bottom base px
-            var [frameX, frameY] = this.thinkingAnimations["base"][this.currentThinkingFrame % this.thinkingAnimations["base"].length];
+            var [frameX, frameY] = this.bubbleAnimations["base"][this.currentbubbleFrame % this.bubbleAnimations["base"].length];
             ctx.drawImage(
-                this.thinkingImg,
+                this.bubbleImg,
                 frameX * 16, frameY * 16,
                 16, 16,
                 x + offsetX, y,
                 16, 16
             );
+            this.updatebubbleAnimationProgress();
         }
     }
 }

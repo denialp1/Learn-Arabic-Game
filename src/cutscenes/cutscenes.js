@@ -2,24 +2,30 @@
 import { astar, convert } from "./astar.js";
 
 export async function cutscene2(map) { // NOTE* script halts  if any movements are invalid (e.g. move up against solid wall)
+    await toggleBubble("kareem", "thinking", true, map);
     await map.startCutscene([
         { who: "player", type: "walk", direction: "down" },
         { who: "kareem", type: "walk", direction: "left" },
     ]);
     setQuiz(map, "kareem", "1,3", "dragDropQuiz");
     await waitQuiz(map);
+    await toggleBubble("kareem", "thinking", false, map);
     await moveTo("kareem", map, 3, 3);
     await map.startCutscene([
         { who: "kareem", type: "stand", direction: "up" },
     ]);
     setQuiz(map, "kareem", "1,2", "multipleChoiceQuiz");
+    await toggleBubble("kareem", "thinking", true, map);
     await waitQuiz(map);
+    await toggleBubble("kareem", "thinking", false, map);
     await moveTo("kareem", map, 13, 6);
     await map.startCutscene([
         { who: "kareem", type: "stand", direction: "up" },
     ]);
     setQuiz(map, "kareem", "1,1", "typeQuiz");
+    await toggleBubble("kareem", "thinking", true, map);
     await waitQuiz(map);
+    await toggleBubble("kareem", "thinking", false, map);
 }
 
 export function cutscene1(map) {
@@ -57,4 +63,10 @@ async function moveTo(name, map, x, y) {
     const path = astar(start, goal);
     // console.log(path);
     await map.startCutscene(convert(path));
+}
+
+async function toggleBubble(name, id, bool, map) {
+    const object = map.gameObjects[name];
+    object.sprite.bubble = bool;
+    object.sprite.bubbleId = id;
 }

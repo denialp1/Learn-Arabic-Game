@@ -1,12 +1,7 @@
-let interactable = null;
-
 // check for each game object, if touch player
-export function checkInteract(gameObjects, player) {
-  interactable = null;
+export function checkInteract(gameObjects, player, isCutscenePlaying) {
   Object.values(gameObjects).forEach(object => { // loop through game objects
-
-    if (object != player && utils.isTouching(player, object)) {
-
+    if (object != player && utils.isTouching(player, object) && !isCutscenePlaying) {
       highlight(object); // highlight if touching
     } else {
       clear(object);
@@ -17,15 +12,9 @@ export function checkInteract(gameObjects, player) {
 function highlight(object) {
   object.interact = true; // need to set to avoid default idle
   object.sprite.setAnimation("outline-"+object.direction);
-  if (object.behavior) { // set popup icon
-    object.sprite[object.behavior] = true;
-  }
 }
 
 // clear animation frame highlight
 function clear(object) {
   object.interact = false;
-  if (object.behavior) {
-    object.sprite[object.behavior] = false;
-  }
 }

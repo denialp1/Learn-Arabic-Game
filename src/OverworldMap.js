@@ -196,7 +196,6 @@ window.OverworldMaps = {
                 //     { type: "walk",  direction: "right" },
                 //     { type: "stand",  direction: "up", time: 1000 },
                 // ],
-                behavior: "thinking",
                 talking: [],
                 quiz: [
                     {
