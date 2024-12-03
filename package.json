@@ -1,0 +1,16 @@
+{
+  "name": "jib-4126-learn-arabic-game",
+  "version": "1.0.0",
+  "description": "Arabic language learning game",
+  "main": "main.html",
+  "scripts": {
+    "start": "http-server . -p 8080 & cross-env OPEN_BROWSER=true npm run open-browser",
+    "open-browser": "cross-env OPEN_BROWSER=true node open-browser.js"
+  },
+  "dependencies": {
+    "http-server": "^0.12.3",
+    "cross-env": "^7.0.3"
+  },
+  "author": "",
+  "license": "MIT"
+}
