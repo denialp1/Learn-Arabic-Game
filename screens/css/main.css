@@ -62,14 +62,14 @@
     font-family: 'pixel', sans-serif;
     background-color: #9B3E24;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Increase font size */
     border: 2px solid #8A2E14;
     border-radius: 25px;
-    padding: 15px 20px;
+    padding: 20px 30px; /* Increase padding for a larger button */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     width: 100%;
-    max-width: 300px;
+    max-width: 350px; /* Optionally increase max width */
     margin: 0 auto;
 }
   
@@ -231,3 +231,66 @@
   .arrow-button:active {
     transform: scale(0.95);
   }
+  
+  /* Increase size of form container */
+  .form-container {
+    background-color: lightgray; /* Optional: add background color for better contrast */
+    border-radius: 25px; /* Rounded corners */
+    padding: 40px; /* Increase padding for a larger container */
+    width: 100%;
+    max-width: 500px; /* Increase the maximum width */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for depth */
+    margin: 0 auto; /* Center the form container */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increase gap between elements */
+  }
+
+  /* login button */
+  #login {
+    font-size: 1.0rem; 
+    padding: 2px 4px; /* Increase padding slightly to make it bigger */
+    width: 50%; 
+    max-width: 60px; 
+    color: black;
+    border: 2px solid #000000; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 0 auto; /* Center the button */
+  }
+
+  #login:hover {
+    background-color: #3A3E59; /* Hover effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  #login:active {
+    transform: scale(0.95); /* Button presses down */
+    box-shadow: none;
+  }
+
+  /* signup button */
+  #signup {
+    font-size: 1.0rem; 
+    padding: 2px 4px; /* Increase padding slightly to make it bigger */
+    width: 50%; 
+    max-width: 80px; 
+    background-color: white; 
+    color: black; 
+    border: 2px solid #000000; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 0 auto; /* Center the button */
+  }
+
+  #signup:hover {
+    background-color: #3A3E59; /* Hover effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  #signup:active {
+    transform: scale(0.95); /* Button presses down */
+    box-shadow: none;
+  }
+
+  
