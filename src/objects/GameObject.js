@@ -16,6 +16,7 @@ class GameObject {
 
         this.talking = config.talking || [];
         this.quiz = config.quiz || [];
+        this.behavior = config.behavior || [];'';
     }
 
     mount(map) {
