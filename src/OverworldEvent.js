@@ -97,6 +97,19 @@ class OverworldEvent {
       })
       quiz.init( document.querySelector(".game-container") )
     }
+
+    pause(resolve) {
+      this.map.isPaused = true;
+      console.log("pause");
+
+      const menu = new PauseMenu({
+        onComplete: () => {
+          resolve();
+          this.map.isPaused = false;
+        }
+      });
+      menu.init(document.querySelector(".game-container"));
+    }
   
     init() {
       return new Promise(resolve => {

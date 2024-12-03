@@ -71,13 +71,27 @@ export class Overworld {
             document.removeEventListener("keydown", startAudioOnKeyPress); // remove listener after first key press
         };
         document.addEventListener("keydown", startAudioOnKeyPress);
-        window.setInterval(step, 10);
+        const gameLoop = () => {
+            if (!this.map.isPaused) {
+            step();
+            }
+            setTimeout(gameLoop, 8);
+        };
+        gameLoop();
     }
 
     bindActionInput() {
         new KeyPressListener("KeyE", () => {
             // Is there person here to start dialogue?
             this.map.checkForActionCutscene();
+        })
+
+        new KeyPressListener("Escape", () => {
+            if (!this.map.isCutscenePlaying) {
+                this.map.startCutscene([
+                    { type: "pause" }
+                ])
+            }
         })
     }
 

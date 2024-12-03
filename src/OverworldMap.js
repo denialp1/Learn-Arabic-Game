@@ -11,6 +11,7 @@ export class OverworldMap {
 
         this.isCutscenePlaying = false;
         this.isQuiz = false;
+        this.isPaused = false;
     }
 
     drawLowerImage(ctx, cameraPerson) {
