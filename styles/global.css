@@ -60,31 +60,3 @@ body {
     font-weight: bold;
     font-style: normal;
   }
-
-  .PauseMenu {
-    position: absolute;
-    left: 4.5em;
-    top: 1em;
-    right: 4.5em;
-    background: #411D31;
-    color: #fff;
-    border: 1px solid var(--accent-color);
-    z-index: 2;
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-bottom: 4px;
-}
-
-.PauseMenu .KeyboardMenu {
-    position: relative;
-    border: 0;
-}
-
-.PauseMenu h2 {
-    font-size: 10px;
-    color: var(--grey-color);
-    margin: 0;
-    padding: 2px 0;
-    text-align: center;
-    border-bottom: 1px solid #fff;
-}

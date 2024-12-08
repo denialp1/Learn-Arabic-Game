@@ -63,7 +63,15 @@ export class Overworld {
             // Draw Upper Layer
             this.map.drawUpperImage(this.ctx, cameraPerson);
 
-            checkInteract(this.map.gameObjects,this.map.gameObjects.player)
+            // Draw interactable bubbles
+            Object.values(this.map.gameObjects).forEach(object => {
+                if (object.sprite.bubble) {
+                    object.sprite.drawBubble(this.ctx, cameraPerson);
+                }
+              })
+    
+
+            checkInteract(this.map.gameObjects,this.map.gameObjects.player, this.map.isCutscenePlaying);
             this.checkAudio();
         }
         const startAudioOnKeyPress = () => {

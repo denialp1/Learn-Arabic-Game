@@ -9,6 +9,11 @@ class PauseMenu {
         this.element.innerHTML = (`
             <h2>Pause Menu</h2>
         `)
+        
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = `../../styles/pause.css`;
+        document.head.appendChild(link);
     }
 
     getOptions(pageKey) {
@@ -26,8 +31,7 @@ class PauseMenu {
                     description: "Go to the main menu",
                     handler: () => {
                         this.close();
-                        // Add logic to navigate to the main menu
-                        window.location.href = "../main.html"; // Example navigation
+                        window.location.href = "../main.html"; // nav to main
                     }
                 }
             ];

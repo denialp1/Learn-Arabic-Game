@@ -1,12 +1,7 @@
-let interactable = null;
-
 // check for each game object, if touch player
-export function checkInteract(gameObjects, player) {
-  interactable = null;
+export function checkInteract(gameObjects, player, isCutscenePlaying) {
   Object.values(gameObjects).forEach(object => { // loop through game objects
-
-    if (object != player && utils.isTouching(player, object)) {
-
+    if (object != player && utils.isTouching(player, object) && !isCutscenePlaying) {
       highlight(object); // highlight if touching
     } else {
       clear(object);
