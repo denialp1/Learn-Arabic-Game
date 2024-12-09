@@ -144,8 +144,7 @@
     margin: 0px 0 0 -295px;
     transform: scale(6.1); /* Scale to zoom in */
     transform-origin: top left; /* Set the origin for scaling */
-    image-rendering: crisp-edges; /* For pixel art or sharp edges */
-    image-rendering: -webkit-optimize-contrast; /* For better quality */
+    image-rendering: pixelated;
   }
   
   .sprite-display {
