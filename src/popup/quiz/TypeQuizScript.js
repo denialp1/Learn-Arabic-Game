@@ -25,7 +25,7 @@ function setExercise(count) {
     exercise = exercises[count - 1];
     answer = exercise.english;
     audioButton.src = exercise.audio; // set audio path
-    audioButton.volume = 0.6;
+    audioButton.volume = localStorage.getItem('gameVolumeScaled');
     placeholder = exercise.placeholder;
     setItems();
     setInputArea();

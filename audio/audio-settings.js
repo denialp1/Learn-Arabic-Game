@@ -1,27 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // set slider controls for game volume
     const volumeSlider = document.getElementById('gameVolumeSlider');
-    var volumeValue = document.getElementById("gameVolume");
-    volumeValue.innerHTML = volumeSlider.value;
-
+    const volumeValue = document.getElementById("gameVolume");
     const sfxSlider = document.getElementById('sfxVolumeSlider');
-    var sfxValue = document.getElementById("sfxVolume");
-    sfxValue.innerHTML = sfxSlider.value;
+    const sfxValue = document.getElementById("sfxVolume");
 
-     // necessary as original mp3 is loud
-    const factor = 0.005;
-    
-    // check for slider changes
+    const MAX_VOLUME = 0.5;
+
+    const scaleToAudioVolume = (sliderValue) => Math.pow(sliderValue / 100, 2) * MAX_VOLUME;
+    const scaleToSliderValue = (audioVolume) => Math.sqrt(audioVolume / MAX_VOLUME) * 100;
+
+    // stored scaled values or use defaults
+    const storedVolume = parseFloat(localStorage.getItem('gameVolumeScaled')) || 0.25; // 25% volume
+    const storedSfxVolume = parseFloat(localStorage.getItem('sfxVolumeScaled')) || 0.25; // 25% SFX volume
+    const initialSliderVolume = scaleToSliderValue(storedVolume);
+    const initialSliderSfxVolume = scaleToSliderValue(storedSfxVolume);
+
+    // set initial slider positions, display values
+    volumeSlider.value = initialSliderVolume;
+    volumeValue.innerHTML = Math.round(initialSliderVolume);
+    sfxSlider.value = initialSliderSfxVolume;
+    sfxValue.innerHTML = Math.round(initialSliderSfxVolume);
+
+    // set initial audio volume
+    if (window.globalAudio) {
+        window.globalAudio.volume = storedVolume;
+    }
+
     volumeSlider.addEventListener('input', (event) => {
-        const volume = parseFloat(event.target.value);
+        const sliderValue = parseFloat(event.target.value);
+        const scaledVolume = scaleToAudioVolume(sliderValue);
 
         if (window.globalAudio) {
-            // console.log("setting volume value", volume);
-            window.globalAudio.volume = volume * factor;
-            volumeValue.innerHTML = Math.round(volume);
+            window.globalAudio.volume = scaledVolume;
+            volumeValue.innerHTML = Math.round(sliderValue);
         }
-        // user interaction required for audio play
-        if (window.globalAudio.muted == true) {
+
+        // save to local storage
+        localStorage.setItem('gameVolumeScaled', scaledVolume);
+
+        if (window.globalAudio.muted) {
             window.globalAudio.muted = false;
             window.globalAudio.play().catch(error => {
                 console.error("Failed to play audio:", error);
@@ -30,12 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     sfxSlider.addEventListener('input', (event) => {
-        const sfxVolume = parseFloat(event.target.value);
+        const sliderValue = parseFloat(event.target.value);
+        const scaledSfxVolume = scaleToAudioVolume(sliderValue);
 
         if (window.globalAudio) {
-            // console.log("setting volume value", volume);
-            window.globalAudio.volume = sfxVolume * factor;
-            sfxValue.innerHTML = Math.round(sfxVolume);
+            window.globalAudio.volume = scaledSfxVolume;
+            sfxValue.innerHTML = Math.round(sliderValue);
         }
+
+        // save local storage
+        localStorage.setItem('sfxVolumeScaled', scaledSfxVolume);
     });
 });
