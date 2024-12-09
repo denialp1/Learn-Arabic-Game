@@ -33,7 +33,7 @@ function setExercise(count) {
     exercise = exercises[count-1];
     if (exercise.audio) { // audio exercise?
       audioButton.src = exercise.audio; // set audio path
-      audioButton.volume = 0.08;
+      audioButton.volume = localStorage.getItem('gameVolumeScaled');
       prompt.innerHTML = exercise.prompt; // moved from setItems()
       toggleMode("audio");
     } else {

@@ -12,7 +12,7 @@ export class Overworld {
 
         this.backgroundAudio = new Audio('../audio/game/sample.mp3');
         this.backgroundAudio.loop = true;
-        this.backgroundAudio.volume = 0.008;
+        this.backgroundAudio.volume = localStorage.getItem('gameVolumeScaled');
         this.backgroundAudio.muted = false;
     }
 
